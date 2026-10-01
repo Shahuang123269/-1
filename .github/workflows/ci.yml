@@ -1,5 +1,6 @@
 name: checks
 on:
+  workflow_dispatch:
   push:
     paths-ignore: ['docs/**', 'reports/**', 'README.md']
   pull_request:
