@@ -10,6 +10,7 @@
 | pytest | 29 passed；含权限/范围、引用反馈、审批摘要、重复审批/任务提交、重启恢复与适配器测试 |
 | pip check | No broken requirements found |
 | 可编辑包安装 | 通过 |
+| wheel 打包 | 通过；包含工作台 HTML |
 | 独立 stdio MCP | 真实服务器发现和调用；子进程 PID 与测试进程不同 |
 | 重启演示 | 创建待审批任务，关闭宿主/MCP，重新打开后批准并核验，完成 |
 | 固定 40 案例 | 40 个控制检查通过；36 completed、3 cancelled、1 reconciliation_needed |
@@ -26,5 +27,7 @@
 凭据保存在本地 gitignored .env，未公开。尚未在 GitHub 创建评论或添加标签；没有真实用户规模、工时节省或独立留出集的质量数据。
 
 本机未发现 Docker。首次上传后 CI 将验证 Windows/Linux 测试，以及 Linux Docker 构建、容器内重启演示；远端结果待确认。Compose 服务启动与真实模型在容器内调用仍需另行验证。
+
+首次 Git 推送返回 403（身份为正确仓库 owner），本地源代码已提交，远端尚未更新。待核对 fine-grained token 的目标仓库选择、Contents/Workflows 写入权限后继续上传；API 返回的 account push 权限不能代替 token 的细分授权。
 
 用户指定仓库通过认证访问成功；本地 origin 已关联，凭据只通过临时 askpass 交给 Git，不写入远端 URL 或 Git 配置。服务当前只支持单进程、单 owner，未实现组织 RBAC 或分布式任务队列。
