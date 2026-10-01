@@ -1,0 +1,68 @@
+[
+  {
+    "full_name": "langchain-ai/agent-inbox",
+    "html_url": "https://github.com/langchain-ai/agent-inbox",
+    "stargazers_count": 1093,
+    "license": {
+      "key": "mit",
+      "name": "MIT License",
+      "spdx_id": "MIT",
+      "url": "https://api.github.com/licenses/mit",
+      "node_id": "MDc6TGljZW5zZTEz"
+    },
+    "default_branch": "main",
+    "pushed_at": "2026-09-18T22:08:30Z",
+    "archived": true,
+    "checked_at": "2026-10-01T14:13:00.044849+00:00",
+    "commit": "f1616f3e7998e7e4fd574545b9558554d88d9c49"
+  },
+  {
+    "full_name": "langchain-ai/deepagents",
+    "html_url": "https://github.com/langchain-ai/deepagents",
+    "stargazers_count": 29890,
+    "license": {
+      "key": "mit",
+      "name": "MIT License",
+      "spdx_id": "MIT",
+      "url": "https://api.github.com/licenses/mit",
+      "node_id": "MDc6TGljZW5zZTEz"
+    },
+    "default_branch": "main",
+    "pushed_at": "2026-10-01T11:53:45Z",
+    "archived": false
+  },
+  {
+    "full_name": "langchain-ai/langgraph",
+    "html_url": "https://github.com/langchain-ai/langgraph",
+    "stargazers_count": 42554,
+    "license": {
+      "key": "mit",
+      "name": "MIT License",
+      "spdx_id": "MIT",
+      "url": "https://api.github.com/licenses/mit",
+      "node_id": "MDc6TGljZW5zZTEz"
+    },
+    "default_branch": "main",
+    "pushed_at": "2026-10-01T09:04:41Z",
+    "archived": false,
+    "checked_at": "2026-10-01T14:12:59.854591+00:00",
+    "commit": "b36b1d58a8b408455b512cfad3b1b26e02927282"
+  },
+  {
+    "full_name": "langchain-ai/open-swe",
+    "html_url": "https://github.com/langchain-ai/open-swe",
+    "stargazers_count": 10779,
+    "license": {
+      "key": "mit",
+      "name": "MIT License",
+      "spdx_id": "MIT",
+      "url": "https://api.github.com/licenses/mit",
+      "node_id": "MDc6TGljZW5zZTEz"
+    },
+    "default_branch": "main",
+    "pushed_at": "2026-10-01T14:04:51Z",
+    "archived": false,
+    "checked_at": "2026-10-01T14:13:00.404665+00:00",
+    "commit": "570287c524ce8056dcac8b4cd6c10d764f7c2540"
+  }
+]

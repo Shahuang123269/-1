@@ -1,0 +1,11 @@
+.env
+.venv/
+__pycache__/
+.idea/
+*.py[cod]
+agent_memory.sqlite
+agent_memory.sqlite-shm
+agent_memory.sqlite-wal
+integrated_agent_memory.sqlite
+integrated_agent_memory.sqlite-shm
+integrated_agent_memory.sqlite-wal

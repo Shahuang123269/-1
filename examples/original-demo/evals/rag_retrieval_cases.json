@@ -1,0 +1,22 @@
+[
+  {
+    "id": "rag-definition",
+    "question": "RAG 检索增强生成是什么？",
+    "expected_sources": ["rag.md"]
+  },
+  {
+    "id": "mcp-roles",
+    "question": "MCP 中 Client 和 Server 分别做什么？",
+    "expected_sources": ["mcp.md"]
+  },
+  {
+    "id": "langgraph-flow",
+    "question": "LangGraph 的状态、节点和边是什么？",
+    "expected_sources": ["langgraph.md"]
+  },
+  {
+    "id": "agent-definition",
+    "question": "Agent 和 Tool 的区别是什么？",
+    "expected_sources": ["agent.md"]
+  }
+]

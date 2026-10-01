@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Issue Agent · 任务工作台</title>
+<style>
+body{font:15px/1.7 system-ui;background:#f4f6fa;color:#202838;margin:0}main{max-width:940px;margin:40px auto;padding:0 20px}
+h1{margin-bottom:0}p{color:#617086}section{background:white;padding:24px;margin-top:20px;border-radius:12px;border:1px solid #dce3ed}
+input,button{font:inherit;padding:9px;border:1px solid #cbd5e1;border-radius:6px}button{cursor:pointer;background:#254ec7;color:white;margin-right:8px}
+button.secondary{background:#fff;color:#254ec7}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:13px/1.6 ui-monospace,monospace;background:#f4f6fa;padding:15px}
+.row{display:flex;gap:12px;flex-wrap:wrap;margin:14px 0}#error{color:#b91c1c}.badge{background:#e9efff;padding:5px 10px;border-radius:5px}
+</style>
+<main><h1>Issue Agent</h1><p>调查 → 建议 → 审批 → 执行 → 读回核验</p><span id="mode" class="badge"></span>
+<section><h2>提交任务</h2><div class="row"><input id="issue" type="number" min="1" value="2" aria-label="Issue 编号">
+<input id="goal" value="检查 Bug 信息完整性并提出处理建议" style="flex:1" aria-label="任务目标"></div>
+<label><input id="write" type="checkbox"> 起草评论与标签操作，执行前需审批</label>
+<div class="row"><input id="token" type="password" placeholder="配置了 API token 时填写" autocomplete="off" aria-label="API token">
+<button id="create">开始调查</button><button id="newtask" class="secondary">新建任务</button></div><div id="error" role="alert"></div></section>
+<section><h2>任务与审批</h2><div class="row"><input id="taskid" placeholder="任务 ID，重启后可在这里恢复查询" style="flex:1"><button id="load" class="secondary">查询</button></div>
+<div id="status"></div><pre id="result">提交任务后显示调查建议和待审动作。</pre><div id="approval" hidden>
+<p>请核对仓库、Issue 编号和下方完整操作内容；批准将执行这些操作。</p><pre id="actions"></pre>
+<button id="approve">批准这些操作</button><button id="reject" class="secondary">拒绝</button></div>
+<button id="resume" class="secondary" hidden>核对并恢复</button></section>
+<section><h2>执行记录</h2><pre id="events">暂无记录</pre></section></main>
+<script>
+const $=id=>document.getElementById(id); let task=null;
+let lastSubmission=null;try{lastSubmission=JSON.parse(localStorage.getItem('issue-agent-submission')||'null')}catch{}
+async function api(path,body,extraHeaders={}){const response=await fetch(path,{method:body?'POST':'GET',headers:{'Content-Type':'application/json',...extraHeaders,...($('token').value?{'Authorization':'Bearer '+$('token').value}:{})},...(body?{body:JSON.stringify(body)}:{})});const data=await response.json();if(!response.ok)throw Error(data.error||JSON.stringify(data));return data}
+async function show(data){task=data;$('taskid').value=data.id;localStorage.setItem('issue-agent-last-task',data.id);$('status').textContent='任务 '+data.id+' · '+data.status+(data.error?' · '+data.error:'');$('result').textContent=JSON.stringify(data.result||{},null,2);$('approval').hidden=data.status!=='awaiting_approval';$('actions').textContent=JSON.stringify({repository:(await api('/health')).repository,issue_number:data.request.issue_number,actions:data.result?.actions},null,2);$('resume').hidden=!['interrupted','reconciliation_needed'].includes(data.status);$('events').textContent=JSON.stringify(await api('/tasks/'+data.id+'/events'),null,2)}
+async function run(fn){$('error').textContent='';for(const b of document.querySelectorAll('button'))b.disabled=true;try{await fn()}catch(e){$('error').textContent=e.message}finally{for(const b of document.querySelectorAll('button'))b.disabled=false}}
+$('create').onclick=()=>run(async()=>{const body={issue_number:Number($('issue').value),goal:$('goal').value,propose_actions:$('write').checked};const signature=JSON.stringify(body);if(!lastSubmission||lastSubmission.signature!==signature)lastSubmission={signature,key:crypto.randomUUID()};localStorage.setItem('issue-agent-submission',JSON.stringify(lastSubmission));await show(await api('/tasks',body,{'Idempotency-Key':lastSubmission.key}));});
+$('newtask').onclick=()=>{lastSubmission=null;localStorage.removeItem('issue-agent-submission');$('taskid').value='';$('status').textContent='已开始新任务，请提交调查目标。';$('approval').hidden=true;$('resume').hidden=true;};
+$('load').onclick=()=>run(async()=>show(await api('/tasks/'+encodeURIComponent($('taskid').value))));
+for(const decision of ['approve','reject'])$(decision).onclick=()=>run(async()=>show(await api('/tasks/'+task.id+'/approval',{digest:task.digest,decision})));
+$('resume').onclick=()=>run(async()=>show(await api('/tasks/'+task.id+'/resume',{})));
+$('taskid').value=localStorage.getItem('issue-agent-last-task')||'';
+api('/health').then(h=>$('mode').textContent=`仓库 ${h.repository} · 模型 ${h.model_mode} · 工具 ${h.tool_mode}`);
+</script></html>

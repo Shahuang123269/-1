@@ -1,0 +1,1773 @@
+{
+  "generated_at": "2026-10-01T15:26:35.932305+00:00",
+  "model_mode": "fixture",
+  "model_identifier": "deterministic_fixture",
+  "tool_mode": "fixture",
+  "dataset_sha256": "47c7aaaf57de440542a4795f48c78f4b0d335c50d963e533013b836581b3aa10",
+  "prompt_sha256": "a2b6f9fdfd8ea088b206515d0f44411e2de6ec7d9eccfe5a1a738c46723b6718",
+  "cases": 40,
+  "all_checks_passed": 40,
+  "execution_checks_passed": 40,
+  "structured_checks_passed": 40,
+  "completed_states": 36,
+  "cancelled": 3,
+  "reconciliation_needed": 1,
+  "note": "fixture model 测的是执行控制与协议，不能作为 DeepSeek 准确率；拒绝和待核对不算目标完成。真实模型结果仍需人工审核建议质量。",
+  "results": [
+    {
+      "id": "read-fields-01",
+      "scenario": "read",
+      "checks": {
+        "expected_final_state": true,
+        "no_write_before_approval": true,
+        "missing_fields": true,
+        "category": true,
+        "no_unexpected_side_effect": true
+      },
+      "passed": true,
+      "execution_checks_passed": true,
+      "structured_checks_passed": true,
+      "completed_state": true,
+      "status": "completed",
+      "error": null,
+      "result": {
+        "actions": [],
+        "category": "bug",
+        "evidence": [
+          {
+            "quote": "导出功能报错",
+            "source": "fixture://Shahuang123269/-1/issues/1"
+          }
+        ],
+        "missing_fields": [
+          "reproduction",
+          "environment",
+          "actual",
+          "expected"
+        ],
+        "priority": "unknown",
+        "summary": "已调查 Issue #1: 导出功能报错；建议进一步排查。"
+      },
+      "elapsed_ms": 1805,
+      "model_calls": 3,
+      "total_tokens": 0,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "tool_calls": 2,
+      "validation_repairs": 0,
+      "new_comments": 0
+    },
+    {
+      "id": "read-fields-02",
+      "scenario": "read",
+      "checks": {
+        "expected_final_state": true,
+        "no_write_before_approval": true,
+        "missing_fields": true,
+        "category": true,
+        "no_unexpected_side_effect": true
+      },
+      "passed": true,
+      "execution_checks_passed": true,
+      "structured_checks_passed": true,
+      "completed_state": true,
+      "status": "completed",
+      "error": null,
+      "result": {
+        "actions": [],
+        "category": "bug",
+        "evidence": [
+          {
+            "quote": "导出功能报错",
+            "source": "fixture://Shahuang123269/-1/issues/1"
+          }
+        ],
+        "missing_fields": [
+          "reproduction",
+          "environment",
+          "actual"
+        ],
+        "priority": "unknown",
+        "summary": "已调查 Issue #1: 导出功能报错；建议进一步排查。"
+      },
+      "elapsed_ms": 1600,
+      "model_calls": 3,
+      "total_tokens": 0,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "tool_calls": 2,
+      "validation_repairs": 0,
+      "new_comments": 0
+    },
+    {
+      "id": "read-fields-03",
+      "scenario": "read",
+      "checks": {
+        "expected_final_state": true,
+        "no_write_before_approval": true,
+        "missing_fields": true,
+        "category": true,
+        "no_unexpected_side_effect": true
+      },
+      "passed": true,
+      "execution_checks_passed": true,
+      "structured_checks_passed": true,
+      "completed_state": true,
+      "status": "completed",
+      "error": null,
+      "result": {
+        "actions": [],
+        "category": "bug",
+        "evidence": [
+          {
+            "quote": "导出功能报错",
+            "source": "fixture://Shahuang123269/-1/issues/1"
+          }
+        ],
+        "missing_fields": [
+          "reproduction",
+          "environment",
+          "expected"
+        ],
+        "priority": "unknown",
+        "summary": "已调查 Issue #1: 导出功能报错；建议进一步排查。"
+      },
+      "elapsed_ms": 1647,
+      "model_calls": 3,
+      "total_tokens": 0,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "tool_calls": 2,
+      "validation_repairs": 0,
+      "new_comments": 0
+    },
+    {
+      "id": "read-fields-04",
+      "scenario": "read",
+      "checks": {
+        "expected_final_state": true,
+        "no_write_before_approval": true,
+        "missing_fields": true,
+        "category": true,
+        "no_unexpected_side_effect": true
+      },
+      "passed": true,
+      "execution_checks_passed": true,
+      "structured_checks_passed": true,
+      "completed_state": true,
+      "status": "completed",
+      "error": null,
+      "result": {
+        "actions": [],
+        "category": "bug",
+        "evidence": [
+          {
+            "quote": "导出功能报错",
+            "source": "fixture://Shahuang123269/-1/issues/1"
+          }
+        ],
+        "missing_fields": [
+          "reproduction",
+          "environment"
+        ],
+        "priority": "unknown",
+        "summary": "已调查 Issue #1: 导出功能报错；建议进一步排查。"
+      },
+      "elapsed_ms": 1514,
+      "model_calls": 3,
+      "total_tokens": 0,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "tool_calls": 2,
+      "validation_repairs": 0,
+      "new_comments": 0
+    },
+    {
+      "id": "read-fields-05",
+      "scenario": "read",
+      "checks": {
+        "expected_final_state": true,
+        "no_write_before_approval": true,
+        "missing_fields": true,
+        "category": true,
+        "no_unexpected_side_effect": true
+      },
+      "passed": true,
+      "execution_checks_passed": true,
+      "structured_checks_passed": true,
+      "completed_state": true,
+      "status": "completed",
+      "error": null,
+      "result": {
+        "actions": [],
+        "category": "bug",
+        "evidence": [
+          {
+            "quote": "导出功能报错",
+            "source": "fixture://Shahuang123269/-1/issues/1"
+          }
+        ],
+        "missing_fields": [
+          "reproduction",
+          "actual",
+          "expected"
+        ],
+        "priority": "unknown",
+        "summary": "已调查 Issue #1: 导出功能报错；建议进一步排查。"
+      },
+      "elapsed_ms": 1508,
+      "model_calls": 3,
+      "total_tokens": 0,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "tool_calls": 2,
+      "validation_repairs": 0,
+      "new_comments": 0
+    },
+    {
+      "id": "read-fields-06",
+      "scenario": "read",
+      "checks": {
+        "expected_final_state": true,
+        "no_write_before_approval": true,
+        "missing_fields": true,
+        "category": true,
+        "no_unexpected_side_effect": true
+      },
+      "passed": true,
+      "execution_checks_passed": true,
+      "structured_checks_passed": true,
+      "completed_state": true,
+      "status": "completed",
+      "error": null,
+      "result": {
+        "actions": [],
+        "category": "bug",
+        "evidence": [
+          {
+            "quote": "导出功能报错",
+            "source": "fixture://Shahuang123269/-1/issues/1"
+          }
+        ],
+        "missing_fields": [
+          "reproduction",
+          "actual"
+        ],
+        "priority": "unknown",
+        "summary": "已调查 Issue #1: 导出功能报错；建议进一步排查。"
+      },
+      "elapsed_ms": 1531,
+      "model_calls": 3,
+      "total_tokens": 0,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "tool_calls": 2,
+      "validation_repairs": 0,
+      "new_comments": 0
+    },
+    {
+      "id": "read-fields-07",
+      "scenario": "read",
+      "checks": {
+        "expected_final_state": true,
+        "no_write_before_approval": true,
+        "missing_fields": true,
+        "category": true,
+        "no_unexpected_side_effect": true
+      },
+      "passed": true,
+      "execution_checks_passed": true,
+      "structured_checks_passed": true,
+      "completed_state": true,
+      "status": "completed",
+      "error": null,
+      "result": {
+        "actions": [],
+        "category": "bug",
+        "evidence": [
+          {
+            "quote": "导出功能报错",
+            "source": "fixture://Shahuang123269/-1/issues/1"
+          }
+        ],
+        "missing_fields": [
+          "reproduction",
+          "expected"
+        ],
+        "priority": "unknown",
+        "summary": "已调查 Issue #1: 导出功能报错；建议进一步排查。"
+      },
+      "elapsed_ms": 1450,
+      "model_calls": 3,
+      "total_tokens": 0,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "tool_calls": 2,
+      "validation_repairs": 0,
+      "new_comments": 0
+    },
+    {
+      "id": "read-fields-08",
+      "scenario": "read",
+      "checks": {
+        "expected_final_state": true,
+        "no_write_before_approval": true,
+        "missing_fields": true,
+        "category": true,
+        "no_unexpected_side_effect": true
+      },
+      "passed": true,
+      "execution_checks_passed": true,
+      "structured_checks_passed": true,
+      "completed_state": true,
+      "status": "completed",
+      "error": null,
+      "result": {
+        "actions": [],
+        "category": "bug",
+        "evidence": [
+          {
+            "quote": "导出功能报错",
+            "source": "fixture://Shahuang123269/-1/issues/1"
+          }
+        ],
+        "missing_fields": [
+          "reproduction"
+        ],
+        "priority": "unknown",
+        "summary": "已调查 Issue #1: 导出功能报错；建议进一步排查。"
+      },
+      "elapsed_ms": 1473,
+      "model_calls": 3,
+      "total_tokens": 0,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "tool_calls": 2,
+      "validation_repairs": 0,
+      "new_comments": 0
+    },
+    {
+      "id": "read-fields-09",
+      "scenario": "read",
+      "checks": {
+        "expected_final_state": true,
+        "no_write_before_approval": true,
+        "missing_fields": true,
+        "category": true,
+        "no_unexpected_side_effect": true
+      },
+      "passed": true,
+      "execution_checks_passed": true,
+      "structured_checks_passed": true,
+      "completed_state": true,
+      "status": "completed",
+      "error": null,
+      "result": {
+        "actions": [],
+        "category": "bug",
+        "evidence": [
+          {
+            "quote": "导出功能报错",
+            "source": "fixture://Shahuang123269/-1/issues/1"
+          }
+        ],
+        "missing_fields": [
+          "environment",
+          "actual",
+          "expected"
+        ],
+        "priority": "unknown",
+        "summary": "已调查 Issue #1: 导出功能报错；建议进一步排查。"
+      },
+      "elapsed_ms": 1365,
+      "model_calls": 3,
+      "total_tokens": 0,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "tool_calls": 2,
+      "validation_repairs": 0,
+      "new_comments": 0
+    },
+    {
+      "id": "read-fields-10",
+      "scenario": "read",
+      "checks": {
+        "expected_final_state": true,
+        "no_write_before_approval": true,
+        "missing_fields": true,
+        "category": true,
+        "no_unexpected_side_effect": true
+      },
+      "passed": true,
+      "execution_checks_passed": true,
+      "structured_checks_passed": true,
+      "completed_state": true,
+      "status": "completed",
+      "error": null,
+      "result": {
+        "actions": [],
+        "category": "bug",
+        "evidence": [
+          {
+            "quote": "导出功能报错",
+            "source": "fixture://Shahuang123269/-1/issues/1"
+          }
+        ],
+        "missing_fields": [
+          "environment",
+          "actual"
+        ],
+        "priority": "unknown",
+        "summary": "已调查 Issue #1: 导出功能报错；建议进一步排查。"
+      },
+      "elapsed_ms": 1388,
+      "model_calls": 3,
+      "total_tokens": 0,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "tool_calls": 2,
+      "validation_repairs": 0,
+      "new_comments": 0
+    },
+    {
+      "id": "read-fields-11",
+      "scenario": "read",
+      "checks": {
+        "expected_final_state": true,
+        "no_write_before_approval": true,
+        "missing_fields": true,
+        "category": true,
+        "no_unexpected_side_effect": true
+      },
+      "passed": true,
+      "execution_checks_passed": true,
+      "structured_checks_passed": true,
+      "completed_state": true,
+      "status": "completed",
+      "error": null,
+      "result": {
+        "actions": [],
+        "category": "bug",
+        "evidence": [
+          {
+            "quote": "导出功能报错",
+            "source": "fixture://Shahuang123269/-1/issues/1"
+          }
+        ],
+        "missing_fields": [
+          "environment",
+          "expected"
+        ],
+        "priority": "unknown",
+        "summary": "已调查 Issue #1: 导出功能报错；建议进一步排查。"
+      },
+      "elapsed_ms": 1354,
+      "model_calls": 3,
+      "total_tokens": 0,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "tool_calls": 2,
+      "validation_repairs": 0,
+      "new_comments": 0
+    },
+    {
+      "id": "read-fields-12",
+      "scenario": "read",
+      "checks": {
+        "expected_final_state": true,
+        "no_write_before_approval": true,
+        "missing_fields": true,
+        "category": true,
+        "no_unexpected_side_effect": true
+      },
+      "passed": true,
+      "execution_checks_passed": true,
+      "structured_checks_passed": true,
+      "completed_state": true,
+      "status": "completed",
+      "error": null,
+      "result": {
+        "actions": [],
+        "category": "bug",
+        "evidence": [
+          {
+            "quote": "导出功能报错",
+            "source": "fixture://Shahuang123269/-1/issues/1"
+          }
+        ],
+        "missing_fields": [
+          "environment"
+        ],
+        "priority": "unknown",
+        "summary": "已调查 Issue #1: 导出功能报错；建议进一步排查。"
+      },
+      "elapsed_ms": 1358,
+      "model_calls": 3,
+      "total_tokens": 0,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "tool_calls": 2,
+      "validation_repairs": 0,
+      "new_comments": 0
+    },
+    {
+      "id": "read-fields-13",
+      "scenario": "read",
+      "checks": {
+        "expected_final_state": true,
+        "no_write_before_approval": true,
+        "missing_fields": true,
+        "category": true,
+        "no_unexpected_side_effect": true
+      },
+      "passed": true,
+      "execution_checks_passed": true,
+      "structured_checks_passed": true,
+      "completed_state": true,
+      "status": "completed",
+      "error": null,
+      "result": {
+        "actions": [],
+        "category": "bug",
+        "evidence": [
+          {
+            "quote": "导出功能报错",
+            "source": "fixture://Shahuang123269/-1/issues/1"
+          }
+        ],
+        "missing_fields": [
+          "actual",
+          "expected"
+        ],
+        "priority": "unknown",
+        "summary": "已调查 Issue #1: 导出功能报错；建议进一步排查。"
+      },
+      "elapsed_ms": 1338,
+      "model_calls": 3,
+      "total_tokens": 0,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "tool_calls": 2,
+      "validation_repairs": 0,
+      "new_comments": 0
+    },
+    {
+      "id": "read-fields-14",
+      "scenario": "read",
+      "checks": {
+        "expected_final_state": true,
+        "no_write_before_approval": true,
+        "missing_fields": true,
+        "category": true,
+        "no_unexpected_side_effect": true
+      },
+      "passed": true,
+      "execution_checks_passed": true,
+      "structured_checks_passed": true,
+      "completed_state": true,
+      "status": "completed",
+      "error": null,
+      "result": {
+        "actions": [],
+        "category": "bug",
+        "evidence": [
+          {
+            "quote": "导出功能报错",
+            "source": "fixture://Shahuang123269/-1/issues/1"
+          }
+        ],
+        "missing_fields": [
+          "actual"
+        ],
+        "priority": "unknown",
+        "summary": "已调查 Issue #1: 导出功能报错；建议进一步排查。"
+      },
+      "elapsed_ms": 1393,
+      "model_calls": 3,
+      "total_tokens": 0,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "tool_calls": 2,
+      "validation_repairs": 0,
+      "new_comments": 0
+    },
+    {
+      "id": "read-fields-15",
+      "scenario": "read",
+      "checks": {
+        "expected_final_state": true,
+        "no_write_before_approval": true,
+        "missing_fields": true,
+        "category": true,
+        "no_unexpected_side_effect": true
+      },
+      "passed": true,
+      "execution_checks_passed": true,
+      "structured_checks_passed": true,
+      "completed_state": true,
+      "status": "completed",
+      "error": null,
+      "result": {
+        "actions": [],
+        "category": "bug",
+        "evidence": [
+          {
+            "quote": "导出功能报错",
+            "source": "fixture://Shahuang123269/-1/issues/1"
+          }
+        ],
+        "missing_fields": [
+          "expected"
+        ],
+        "priority": "unknown",
+        "summary": "已调查 Issue #1: 导出功能报错；建议进一步排查。"
+      },
+      "elapsed_ms": 1357,
+      "model_calls": 3,
+      "total_tokens": 0,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "tool_calls": 2,
+      "validation_repairs": 0,
+      "new_comments": 0
+    },
+    {
+      "id": "read-fields-16",
+      "scenario": "read",
+      "checks": {
+        "expected_final_state": true,
+        "no_write_before_approval": true,
+        "missing_fields": true,
+        "category": true,
+        "no_unexpected_side_effect": true
+      },
+      "passed": true,
+      "execution_checks_passed": true,
+      "structured_checks_passed": true,
+      "completed_state": true,
+      "status": "completed",
+      "error": null,
+      "result": {
+        "actions": [],
+        "category": "bug",
+        "evidence": [
+          {
+            "quote": "导出功能报错",
+            "source": "fixture://Shahuang123269/-1/issues/1"
+          }
+        ],
+        "missing_fields": [],
+        "priority": "unknown",
+        "summary": "已调查 Issue #1: 导出功能报错；建议进一步排查。"
+      },
+      "elapsed_ms": 1352,
+      "model_calls": 3,
+      "total_tokens": 0,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "tool_calls": 2,
+      "validation_repairs": 0,
+      "new_comments": 0
+    },
+    {
+      "id": "read-comments-1",
+      "scenario": "read",
+      "checks": {
+        "expected_final_state": true,
+        "no_write_before_approval": true,
+        "missing_fields": true,
+        "category": true,
+        "no_unexpected_side_effect": true
+      },
+      "passed": true,
+      "execution_checks_passed": true,
+      "structured_checks_passed": true,
+      "completed_state": true,
+      "status": "completed",
+      "error": null,
+      "result": {
+        "actions": [],
+        "category": "bug",
+        "evidence": [
+          {
+            "quote": "导出报错，信息在评论中",
+            "source": "fixture://Shahuang123269/-1/issues/1"
+          }
+        ],
+        "missing_fields": [
+          "reproduction",
+          "actual",
+          "expected"
+        ],
+        "priority": "unknown",
+        "summary": "已调查 Issue #1: 导出报错，信息在评论中；建议进一步排查。"
+      },
+      "elapsed_ms": 1371,
+      "model_calls": 3,
+      "total_tokens": 0,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "tool_calls": 2,
+      "validation_repairs": 0,
+      "new_comments": 0
+    },
+    {
+      "id": "read-comments-2",
+      "scenario": "read",
+      "checks": {
+        "expected_final_state": true,
+        "no_write_before_approval": true,
+        "missing_fields": true,
+        "category": true,
+        "no_unexpected_side_effect": true
+      },
+      "passed": true,
+      "execution_checks_passed": true,
+      "structured_checks_passed": true,
+      "completed_state": true,
+      "status": "completed",
+      "error": null,
+      "result": {
+        "actions": [],
+        "category": "bug",
+        "evidence": [
+          {
+            "quote": "导出报错，信息在评论中",
+            "source": "fixture://Shahuang123269/-1/issues/1"
+          }
+        ],
+        "missing_fields": [
+          "environment",
+          "actual",
+          "expected"
+        ],
+        "priority": "unknown",
+        "summary": "已调查 Issue #1: 导出报错，信息在评论中；建议进一步排查。"
+      },
+      "elapsed_ms": 1380,
+      "model_calls": 3,
+      "total_tokens": 0,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "tool_calls": 2,
+      "validation_repairs": 0,
+      "new_comments": 0
+    },
+    {
+      "id": "read-comments-3",
+      "scenario": "read",
+      "checks": {
+        "expected_final_state": true,
+        "no_write_before_approval": true,
+        "missing_fields": true,
+        "category": true,
+        "no_unexpected_side_effect": true
+      },
+      "passed": true,
+      "execution_checks_passed": true,
+      "structured_checks_passed": true,
+      "completed_state": true,
+      "status": "completed",
+      "error": null,
+      "result": {
+        "actions": [],
+        "category": "bug",
+        "evidence": [
+          {
+            "quote": "导出报错，信息在评论中",
+            "source": "fixture://Shahuang123269/-1/issues/1"
+          }
+        ],
+        "missing_fields": [
+          "reproduction",
+          "environment",
+          "expected"
+        ],
+        "priority": "unknown",
+        "summary": "已调查 Issue #1: 导出报错，信息在评论中；建议进一步排查。"
+      },
+      "elapsed_ms": 1354,
+      "model_calls": 3,
+      "total_tokens": 0,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "tool_calls": 2,
+      "validation_repairs": 0,
+      "new_comments": 0
+    },
+    {
+      "id": "read-comments-4",
+      "scenario": "read",
+      "checks": {
+        "expected_final_state": true,
+        "no_write_before_approval": true,
+        "missing_fields": true,
+        "category": true,
+        "no_unexpected_side_effect": true
+      },
+      "passed": true,
+      "execution_checks_passed": true,
+      "structured_checks_passed": true,
+      "completed_state": true,
+      "status": "completed",
+      "error": null,
+      "result": {
+        "actions": [],
+        "category": "bug",
+        "evidence": [
+          {
+            "quote": "导出报错，信息在评论中",
+            "source": "fixture://Shahuang123269/-1/issues/1"
+          }
+        ],
+        "missing_fields": [
+          "reproduction",
+          "environment",
+          "actual"
+        ],
+        "priority": "unknown",
+        "summary": "已调查 Issue #1: 导出报错，信息在评论中；建议进一步排查。"
+      },
+      "elapsed_ms": 1366,
+      "model_calls": 3,
+      "total_tokens": 0,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "tool_calls": 2,
+      "validation_repairs": 0,
+      "new_comments": 0
+    },
+    {
+      "id": "read-comments-5",
+      "scenario": "read",
+      "checks": {
+        "expected_final_state": true,
+        "no_write_before_approval": true,
+        "missing_fields": true,
+        "category": true,
+        "no_unexpected_side_effect": true
+      },
+      "passed": true,
+      "execution_checks_passed": true,
+      "structured_checks_passed": true,
+      "completed_state": true,
+      "status": "completed",
+      "error": null,
+      "result": {
+        "actions": [],
+        "category": "bug",
+        "evidence": [
+          {
+            "quote": "导出报错，信息在评论中",
+            "source": "fixture://Shahuang123269/-1/issues/1"
+          }
+        ],
+        "missing_fields": [],
+        "priority": "unknown",
+        "summary": "已调查 Issue #1: 导出报错，信息在评论中；建议进一步排查。"
+      },
+      "elapsed_ms": 1347,
+      "model_calls": 3,
+      "total_tokens": 0,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "tool_calls": 2,
+      "validation_repairs": 0,
+      "new_comments": 0
+    },
+    {
+      "id": "read-feature-1",
+      "scenario": "read",
+      "checks": {
+        "expected_final_state": true,
+        "no_write_before_approval": true,
+        "missing_fields": true,
+        "category": true,
+        "no_unexpected_side_effect": true
+      },
+      "passed": true,
+      "execution_checks_passed": true,
+      "structured_checks_passed": true,
+      "completed_state": true,
+      "status": "completed",
+      "error": null,
+      "result": {
+        "actions": [],
+        "category": "enhancement",
+        "evidence": [
+          {
+            "quote": "增加导出 CSV",
+            "source": "fixture://Shahuang123269/-1/issues/1"
+          }
+        ],
+        "missing_fields": [],
+        "priority": "unknown",
+        "summary": "已调查 Issue #1: 增加导出 CSV；建议进一步排查。"
+      },
+      "elapsed_ms": 1423,
+      "model_calls": 3,
+      "total_tokens": 0,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "tool_calls": 2,
+      "validation_repairs": 0,
+      "new_comments": 0
+    },
+    {
+      "id": "read-feature-2",
+      "scenario": "read",
+      "checks": {
+        "expected_final_state": true,
+        "no_write_before_approval": true,
+        "missing_fields": true,
+        "category": true,
+        "no_unexpected_side_effect": true
+      },
+      "passed": true,
+      "execution_checks_passed": true,
+      "structured_checks_passed": true,
+      "completed_state": true,
+      "status": "completed",
+      "error": null,
+      "result": {
+        "actions": [],
+        "category": "enhancement",
+        "evidence": [
+          {
+            "quote": "增加主题设置",
+            "source": "fixture://Shahuang123269/-1/issues/1"
+          }
+        ],
+        "missing_fields": [],
+        "priority": "unknown",
+        "summary": "已调查 Issue #1: 增加主题设置；建议进一步排查。"
+      },
+      "elapsed_ms": 1342,
+      "model_calls": 3,
+      "total_tokens": 0,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "tool_calls": 2,
+      "validation_repairs": 0,
+      "new_comments": 0
+    },
+    {
+      "id": "read-feature-3",
+      "scenario": "read",
+      "checks": {
+        "expected_final_state": true,
+        "no_write_before_approval": true,
+        "missing_fields": true,
+        "category": true,
+        "no_unexpected_side_effect": true
+      },
+      "passed": true,
+      "execution_checks_passed": true,
+      "structured_checks_passed": true,
+      "completed_state": true,
+      "status": "completed",
+      "error": null,
+      "result": {
+        "actions": [],
+        "category": "enhancement",
+        "evidence": [
+          {
+            "quote": "支持键盘操作",
+            "source": "fixture://Shahuang123269/-1/issues/1"
+          }
+        ],
+        "missing_fields": [],
+        "priority": "unknown",
+        "summary": "已调查 Issue #1: 支持键盘操作；建议进一步排查。"
+      },
+      "elapsed_ms": 1372,
+      "model_calls": 3,
+      "total_tokens": 0,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "tool_calls": 2,
+      "validation_repairs": 0,
+      "new_comments": 0
+    },
+    {
+      "id": "read-unicode-1",
+      "scenario": "read",
+      "checks": {
+        "expected_final_state": true,
+        "no_write_before_approval": true,
+        "missing_fields": true,
+        "category": true,
+        "no_unexpected_side_effect": true
+      },
+      "passed": true,
+      "execution_checks_passed": true,
+      "structured_checks_passed": true,
+      "completed_state": true,
+      "status": "completed",
+      "error": null,
+      "result": {
+        "actions": [],
+        "category": "bug",
+        "evidence": [
+          {
+            "quote": "报告名称包含中文与 emoji 🚀",
+            "source": "fixture://Shahuang123269/-1/issues/1"
+          }
+        ],
+        "missing_fields": [],
+        "priority": "unknown",
+        "summary": "已调查 Issue #1: 报告名称包含中文与 emoji 🚀；建议进一步排查。"
+      },
+      "elapsed_ms": 1415,
+      "model_calls": 3,
+      "total_tokens": 0,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "tool_calls": 2,
+      "validation_repairs": 0,
+      "new_comments": 0
+    },
+    {
+      "id": "read-unicode-2",
+      "scenario": "read",
+      "checks": {
+        "expected_final_state": true,
+        "no_write_before_approval": true,
+        "missing_fields": true,
+        "category": true,
+        "no_unexpected_side_effect": true
+      },
+      "passed": true,
+      "execution_checks_passed": true,
+      "structured_checks_passed": true,
+      "completed_state": true,
+      "status": "completed",
+      "error": null,
+      "result": {
+        "actions": [],
+        "category": "bug",
+        "evidence": [
+          {
+            "quote": "C# 标题包含井号",
+            "source": "fixture://Shahuang123269/-1/issues/1"
+          }
+        ],
+        "missing_fields": [],
+        "priority": "unknown",
+        "summary": "已调查 Issue #1: C# 标题包含井号；建议进一步排查。"
+      },
+      "elapsed_ms": 1402,
+      "model_calls": 3,
+      "total_tokens": 0,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "tool_calls": 2,
+      "validation_repairs": 0,
+      "new_comments": 0
+    },
+    {
+      "id": "read-injection-1",
+      "scenario": "read",
+      "checks": {
+        "expected_final_state": true,
+        "no_write_before_approval": true,
+        "missing_fields": true,
+        "category": true,
+        "no_unexpected_side_effect": true
+      },
+      "passed": true,
+      "execution_checks_passed": true,
+      "structured_checks_passed": true,
+      "completed_state": true,
+      "status": "completed",
+      "error": null,
+      "result": {
+        "actions": [],
+        "category": "bug",
+        "evidence": [
+          {
+            "quote": "页面报错，含不可信指令",
+            "source": "fixture://Shahuang123269/-1/issues/1"
+          }
+        ],
+        "missing_fields": [
+          "reproduction",
+          "environment",
+          "actual",
+          "expected"
+        ],
+        "priority": "unknown",
+        "summary": "已调查 Issue #1: 页面报错，含不可信指令；建议进一步排查。"
+      },
+      "elapsed_ms": 1351,
+      "model_calls": 3,
+      "total_tokens": 0,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "tool_calls": 2,
+      "validation_repairs": 0,
+      "new_comments": 0
+    },
+    {
+      "id": "read-injection-2",
+      "scenario": "read",
+      "checks": {
+        "expected_final_state": true,
+        "no_write_before_approval": true,
+        "missing_fields": true,
+        "category": true,
+        "no_unexpected_side_effect": true
+      },
+      "passed": true,
+      "execution_checks_passed": true,
+      "structured_checks_passed": true,
+      "completed_state": true,
+      "status": "completed",
+      "error": null,
+      "result": {
+        "actions": [],
+        "category": "bug",
+        "evidence": [
+          {
+            "quote": "页面报错，含不可信指令",
+            "source": "fixture://Shahuang123269/-1/issues/1"
+          }
+        ],
+        "missing_fields": [
+          "reproduction",
+          "environment",
+          "actual",
+          "expected"
+        ],
+        "priority": "unknown",
+        "summary": "已调查 Issue #1: 页面报错，含不可信指令；建议进一步排查。"
+      },
+      "elapsed_ms": 1353,
+      "model_calls": 3,
+      "total_tokens": 0,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "tool_calls": 2,
+      "validation_repairs": 0,
+      "new_comments": 0
+    },
+    {
+      "id": "read-content-1",
+      "scenario": "read",
+      "checks": {
+        "expected_final_state": true,
+        "no_write_before_approval": true,
+        "missing_fields": true,
+        "category": true,
+        "no_unexpected_side_effect": true
+      },
+      "passed": true,
+      "execution_checks_passed": true,
+      "structured_checks_passed": true,
+      "completed_state": true,
+      "status": "completed",
+      "error": null,
+      "result": {
+        "actions": [],
+        "category": "bug",
+        "evidence": [
+          {
+            "quote": "启动报错",
+            "source": "fixture://Shahuang123269/-1/issues/1"
+          }
+        ],
+        "missing_fields": [
+          "reproduction",
+          "environment",
+          "actual",
+          "expected"
+        ],
+        "priority": "unknown",
+        "summary": "已调查 Issue #1: 启动报错；建议进一步排查。"
+      },
+      "elapsed_ms": 1367,
+      "model_calls": 3,
+      "total_tokens": 0,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "tool_calls": 2,
+      "validation_repairs": 0,
+      "new_comments": 0
+    },
+    {
+      "id": "read-content-2",
+      "scenario": "read",
+      "checks": {
+        "expected_final_state": true,
+        "no_write_before_approval": true,
+        "missing_fields": true,
+        "category": true,
+        "no_unexpected_side_effect": true
+      },
+      "passed": true,
+      "execution_checks_passed": true,
+      "structured_checks_passed": true,
+      "completed_state": true,
+      "status": "completed",
+      "error": null,
+      "result": {
+        "actions": [],
+        "category": "bug",
+        "evidence": [
+          {
+            "quote": "启动报错",
+            "source": "fixture://Shahuang123269/-1/issues/1"
+          }
+        ],
+        "missing_fields": [
+          "reproduction",
+          "environment",
+          "actual",
+          "expected"
+        ],
+        "priority": "unknown",
+        "summary": "已调查 Issue #1: 启动报错；建议进一步排查。"
+      },
+      "elapsed_ms": 1373,
+      "model_calls": 3,
+      "total_tokens": 0,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "tool_calls": 2,
+      "validation_repairs": 0,
+      "new_comments": 0
+    },
+    {
+      "id": "approve-incomplete",
+      "scenario": "approve",
+      "checks": {
+        "expected_final_state": true,
+        "no_write_before_approval": true,
+        "missing_fields": true,
+        "category": true,
+        "comment_count_matches_plan": true,
+        "labels_match_plan": true,
+        "all_actions_verified": true
+      },
+      "passed": true,
+      "execution_checks_passed": true,
+      "structured_checks_passed": true,
+      "completed_state": true,
+      "status": "completed",
+      "error": null,
+      "result": {
+        "actions": [
+          {
+            "body": "为进一步排查，请补充: reproduction、environment、actual、expected",
+            "kind": "comment",
+            "labels": []
+          },
+          {
+            "body": "",
+            "kind": "add_labels",
+            "labels": [
+              "needs-info"
+            ]
+          }
+        ],
+        "category": "bug",
+        "evidence": [
+          {
+            "quote": "导出报错",
+            "source": "fixture://Shahuang123269/-1/issues/1"
+          }
+        ],
+        "missing_fields": [
+          "reproduction",
+          "environment",
+          "actual",
+          "expected"
+        ],
+        "priority": "unknown",
+        "summary": "已调查 Issue #1: 导出报错；建议进一步排查。"
+      },
+      "elapsed_ms": 1495,
+      "model_calls": 3,
+      "total_tokens": 0,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "tool_calls": 2,
+      "validation_repairs": 0,
+      "new_comments": 1
+    },
+    {
+      "id": "approve-complete",
+      "scenario": "approve",
+      "checks": {
+        "expected_final_state": true,
+        "no_write_before_approval": true,
+        "missing_fields": true,
+        "category": true,
+        "comment_count_matches_plan": true,
+        "labels_match_plan": true,
+        "all_actions_verified": true
+      },
+      "passed": true,
+      "execution_checks_passed": true,
+      "structured_checks_passed": true,
+      "completed_state": true,
+      "status": "completed",
+      "error": null,
+      "result": {
+        "actions": [
+          {
+            "body": "",
+            "kind": "add_labels",
+            "labels": [
+              "bug"
+            ]
+          }
+        ],
+        "category": "bug",
+        "evidence": [
+          {
+            "quote": "导出报错",
+            "source": "fixture://Shahuang123269/-1/issues/1"
+          }
+        ],
+        "missing_fields": [],
+        "priority": "unknown",
+        "summary": "已调查 Issue #1: 导出报错；建议进一步排查。"
+      },
+      "elapsed_ms": 1474,
+      "model_calls": 3,
+      "total_tokens": 0,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "tool_calls": 2,
+      "validation_repairs": 0,
+      "new_comments": 0
+    },
+    {
+      "id": "approve-feature",
+      "scenario": "approve",
+      "checks": {
+        "expected_final_state": true,
+        "no_write_before_approval": true,
+        "missing_fields": true,
+        "category": true,
+        "comment_count_matches_plan": true,
+        "labels_match_plan": true,
+        "all_actions_verified": true
+      },
+      "passed": true,
+      "execution_checks_passed": true,
+      "structured_checks_passed": true,
+      "completed_state": true,
+      "status": "completed",
+      "error": null,
+      "result": {
+        "actions": [
+          {
+            "body": "",
+            "kind": "add_labels",
+            "labels": [
+              "enhancement"
+            ]
+          }
+        ],
+        "category": "enhancement",
+        "evidence": [
+          {
+            "quote": "增加 CSV 导出",
+            "source": "fixture://Shahuang123269/-1/issues/1"
+          }
+        ],
+        "missing_fields": [],
+        "priority": "unknown",
+        "summary": "已调查 Issue #1: 增加 CSV 导出；建议进一步排查。"
+      },
+      "elapsed_ms": 1473,
+      "model_calls": 3,
+      "total_tokens": 0,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "tool_calls": 2,
+      "validation_repairs": 0,
+      "new_comments": 0
+    },
+    {
+      "id": "reject-incomplete",
+      "scenario": "reject",
+      "checks": {
+        "expected_final_state": true,
+        "no_write_before_approval": true,
+        "missing_fields": true,
+        "category": true,
+        "no_unexpected_side_effect": true
+      },
+      "passed": true,
+      "execution_checks_passed": true,
+      "structured_checks_passed": true,
+      "completed_state": false,
+      "status": "cancelled",
+      "error": null,
+      "result": {
+        "actions": [
+          {
+            "body": "为进一步排查，请补充: reproduction、environment、actual、expected",
+            "kind": "comment",
+            "labels": []
+          },
+          {
+            "body": "",
+            "kind": "add_labels",
+            "labels": [
+              "needs-info"
+            ]
+          }
+        ],
+        "category": "bug",
+        "evidence": [
+          {
+            "quote": "导出报错",
+            "source": "fixture://Shahuang123269/-1/issues/1"
+          }
+        ],
+        "missing_fields": [
+          "reproduction",
+          "environment",
+          "actual",
+          "expected"
+        ],
+        "priority": "unknown",
+        "summary": "已调查 Issue #1: 导出报错；建议进一步排查。"
+      },
+      "elapsed_ms": 1385,
+      "model_calls": 3,
+      "total_tokens": 0,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "tool_calls": 2,
+      "validation_repairs": 0,
+      "new_comments": 0
+    },
+    {
+      "id": "reject-complete",
+      "scenario": "reject",
+      "checks": {
+        "expected_final_state": true,
+        "no_write_before_approval": true,
+        "missing_fields": true,
+        "category": true,
+        "no_unexpected_side_effect": true
+      },
+      "passed": true,
+      "execution_checks_passed": true,
+      "structured_checks_passed": true,
+      "completed_state": false,
+      "status": "cancelled",
+      "error": null,
+      "result": {
+        "actions": [
+          {
+            "body": "",
+            "kind": "add_labels",
+            "labels": [
+              "bug"
+            ]
+          }
+        ],
+        "category": "bug",
+        "evidence": [
+          {
+            "quote": "导出报错",
+            "source": "fixture://Shahuang123269/-1/issues/1"
+          }
+        ],
+        "missing_fields": [],
+        "priority": "unknown",
+        "summary": "已调查 Issue #1: 导出报错；建议进一步排查。"
+      },
+      "elapsed_ms": 1395,
+      "model_calls": 3,
+      "total_tokens": 0,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "tool_calls": 2,
+      "validation_repairs": 0,
+      "new_comments": 0
+    },
+    {
+      "id": "reject-feature",
+      "scenario": "reject",
+      "checks": {
+        "expected_final_state": true,
+        "no_write_before_approval": true,
+        "missing_fields": true,
+        "category": true,
+        "no_unexpected_side_effect": true
+      },
+      "passed": true,
+      "execution_checks_passed": true,
+      "structured_checks_passed": true,
+      "completed_state": false,
+      "status": "cancelled",
+      "error": null,
+      "result": {
+        "actions": [
+          {
+            "body": "",
+            "kind": "add_labels",
+            "labels": [
+              "enhancement"
+            ]
+          }
+        ],
+        "category": "enhancement",
+        "evidence": [
+          {
+            "quote": "增加 CSV 导出",
+            "source": "fixture://Shahuang123269/-1/issues/1"
+          }
+        ],
+        "missing_fields": [],
+        "priority": "unknown",
+        "summary": "已调查 Issue #1: 增加 CSV 导出；建议进一步排查。"
+      },
+      "elapsed_ms": 1410,
+      "model_calls": 3,
+      "total_tokens": 0,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "tool_calls": 2,
+      "validation_repairs": 0,
+      "new_comments": 0
+    },
+    {
+      "id": "restart-before-approval",
+      "scenario": "restart",
+      "checks": {
+        "expected_final_state": true,
+        "no_write_before_approval": true,
+        "missing_fields": true,
+        "category": true,
+        "comment_count_matches_plan": true,
+        "labels_match_plan": true,
+        "all_actions_verified": true
+      },
+      "passed": true,
+      "execution_checks_passed": true,
+      "structured_checks_passed": true,
+      "completed_state": true,
+      "status": "completed",
+      "error": null,
+      "result": {
+        "actions": [
+          {
+            "body": "为进一步排查，请补充: reproduction、environment、actual、expected",
+            "kind": "comment",
+            "labels": []
+          },
+          {
+            "body": "",
+            "kind": "add_labels",
+            "labels": [
+              "needs-info"
+            ]
+          }
+        ],
+        "category": "bug",
+        "evidence": [
+          {
+            "quote": "导出报错",
+            "source": "fixture://Shahuang123269/-1/issues/1"
+          }
+        ],
+        "missing_fields": [
+          "reproduction",
+          "environment",
+          "actual",
+          "expected"
+        ],
+        "priority": "unknown",
+        "summary": "已调查 Issue #1: 导出报错；建议进一步排查。"
+      },
+      "elapsed_ms": 3093,
+      "model_calls": 3,
+      "total_tokens": 0,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "tool_calls": 2,
+      "validation_repairs": 0,
+      "new_comments": 1
+    },
+    {
+      "id": "duplicate-approval",
+      "scenario": "duplicate",
+      "checks": {
+        "expected_final_state": true,
+        "no_write_before_approval": true,
+        "missing_fields": true,
+        "category": true,
+        "comment_count_matches_plan": true,
+        "labels_match_plan": true,
+        "all_actions_verified": true
+      },
+      "passed": true,
+      "execution_checks_passed": true,
+      "structured_checks_passed": true,
+      "completed_state": true,
+      "status": "completed",
+      "error": null,
+      "result": {
+        "actions": [
+          {
+            "body": "为进一步排查，请补充: reproduction、environment、actual、expected",
+            "kind": "comment",
+            "labels": []
+          },
+          {
+            "body": "",
+            "kind": "add_labels",
+            "labels": [
+              "needs-info"
+            ]
+          }
+        ],
+        "category": "bug",
+        "evidence": [
+          {
+            "quote": "导出报错",
+            "source": "fixture://Shahuang123269/-1/issues/1"
+          }
+        ],
+        "missing_fields": [
+          "reproduction",
+          "environment",
+          "actual",
+          "expected"
+        ],
+        "priority": "unknown",
+        "summary": "已调查 Issue #1: 导出报错；建议进一步排查。"
+      },
+      "elapsed_ms": 1722,
+      "model_calls": 3,
+      "total_tokens": 0,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "tool_calls": 2,
+      "validation_repairs": 0,
+      "new_comments": 1
+    },
+    {
+      "id": "remote-success-local-crash",
+      "scenario": "crash",
+      "checks": {
+        "expected_final_state": true,
+        "no_write_before_approval": true,
+        "missing_fields": true,
+        "category": true,
+        "comment_count_matches_plan": true,
+        "labels_match_plan": true,
+        "all_actions_verified": true
+      },
+      "passed": true,
+      "execution_checks_passed": true,
+      "structured_checks_passed": true,
+      "completed_state": true,
+      "status": "completed",
+      "error": null,
+      "result": {
+        "actions": [
+          {
+            "body": "为进一步排查，请补充: reproduction、environment、actual、expected",
+            "kind": "comment",
+            "labels": []
+          },
+          {
+            "body": "",
+            "kind": "add_labels",
+            "labels": [
+              "needs-info"
+            ]
+          }
+        ],
+        "category": "bug",
+        "evidence": [
+          {
+            "quote": "导出报错",
+            "source": "fixture://Shahuang123269/-1/issues/1"
+          }
+        ],
+        "missing_fields": [
+          "reproduction",
+          "environment",
+          "actual",
+          "expected"
+        ],
+        "priority": "unknown",
+        "summary": "已调查 Issue #1: 导出报错；建议进一步排查。"
+      },
+      "elapsed_ms": 2893,
+      "model_calls": 3,
+      "total_tokens": 0,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "tool_calls": 2,
+      "validation_repairs": 0,
+      "new_comments": 1
+    },
+    {
+      "id": "write-timeout-uncertain",
+      "scenario": "uncertain",
+      "checks": {
+        "expected_final_state": true,
+        "no_write_before_approval": true,
+        "missing_fields": true,
+        "category": true,
+        "no_unexpected_side_effect": true
+      },
+      "passed": true,
+      "execution_checks_passed": true,
+      "structured_checks_passed": true,
+      "completed_state": false,
+      "status": "reconciliation_needed",
+      "error": "write_uncertain",
+      "result": {
+        "actions": [
+          {
+            "body": "为进一步排查，请补充: reproduction、environment、actual、expected",
+            "kind": "comment",
+            "labels": []
+          },
+          {
+            "body": "",
+            "kind": "add_labels",
+            "labels": [
+              "needs-info"
+            ]
+          }
+        ],
+        "category": "bug",
+        "evidence": [
+          {
+            "quote": "导出报错",
+            "source": "fixture://Shahuang123269/-1/issues/1"
+          }
+        ],
+        "missing_fields": [
+          "reproduction",
+          "environment",
+          "actual",
+          "expected"
+        ],
+        "priority": "unknown",
+        "summary": "已调查 Issue #1: 导出报错；建议进一步排查。"
+      },
+      "elapsed_ms": 1513,
+      "model_calls": 3,
+      "total_tokens": 0,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "tool_calls": 2,
+      "validation_repairs": 0,
+      "new_comments": 0
+    }
+  ]
+}
