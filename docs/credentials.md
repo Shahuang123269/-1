@@ -13,7 +13,7 @@
 1. Token name 例如 issue-agent-dev，有效期建议先设置 30 天。
 2. Resource owner 选择 Shahuang123269。
 3. Repository access 选择 Only select repositories，只选 -1。
-4. Repository permissions：Contents、Workflows、Issues 选择 Read and write。
+4. Repository permissions：Contents、Issues 选择 Read and write；Workflows 开启写权限（官方权限级别为 write，按界面选择 Write 或 Read and write）。如果未列出这些权限，先通过 Add permissions 添加对应项。
 5. 创建后将 token 填到 `.env` 的 IA_GITHUB_TOKEN。
 
 Contents/Workflows 用于上传项目代码和工作流；仅运行 Issue 业务时应使用另一份只授权 Issues 的 token，缩小运行凭据权限。细粒度 token 的仓库与权限限制见 [GitHub 官方说明](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)。
