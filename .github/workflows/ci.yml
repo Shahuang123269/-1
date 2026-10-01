@@ -1,6 +1,8 @@
 name: checks
 on:
   workflow_dispatch:
+  repository_dispatch:
+    types: [verification_requested]
   push:
     paths-ignore: ['docs/**', 'reports/**', 'README.md']
   pull_request:
