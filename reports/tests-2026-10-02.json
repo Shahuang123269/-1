@@ -1,0 +1,235 @@
+{
+  "generated_at": "2026-10-02T03:11:50.906860+00:00",
+  "source_commit": "e68c6aa8325312ece686c448c454cbfc97eeac81",
+  "platform": "Windows",
+  "python_version": "3.13.14",
+  "dependencies": {
+    "langgraph": "1.2.12",
+    "langgraph-checkpoint-sqlite": "3.1.1",
+    "mcp": "1.30.0",
+    "openai": "2.54.0",
+    "fastapi": "0.142.2",
+    "pytest": "9.1.1",
+    "ruff": "0.16.9"
+  },
+  "checks": [
+    {
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "--junitxml=C:\\Users\\95878\\Documents\\Codex\\2026-10-01\\https-chatgpt-com-share-6abd3431-e4d8\\work\\tests-2026-10-02.xml"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 16.225,
+      "stdout": ".............................                                            [100%]\n29 passed in 13.77s",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.84,
+      "stdout": "All checks passed!",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "pip",
+        "check"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.51,
+      "stdout": "No broken requirements found.",
+      "stderr": ""
+    }
+  ],
+  "test_counts": {
+    "passed": 29
+  },
+  "tests": [
+    {
+      "module": "tests.test_api",
+      "name": "test_api_task_approval_events_and_sse",
+      "seconds": 1.754,
+      "status": "passed"
+    },
+    {
+      "module": "tests.test_api",
+      "name": "test_auth_and_cross_origin_protection",
+      "seconds": 1.355,
+      "status": "passed"
+    },
+    {
+      "module": "tests.test_engine",
+      "name": "test_read_task_requires_no_approval",
+      "seconds": 0.163,
+      "status": "passed"
+    },
+    {
+      "module": "tests.test_engine",
+      "name": "test_no_write_before_approval_then_exact_actions",
+      "seconds": 0.328,
+      "status": "passed"
+    },
+    {
+      "module": "tests.test_engine",
+      "name": "test_reject_has_no_side_effect_and_cannot_be_overridden",
+      "seconds": 0.213,
+      "status": "passed"
+    },
+    {
+      "module": "tests.test_engine",
+      "name": "test_restart_pending_approval",
+      "seconds": 0.344,
+      "status": "passed"
+    },
+    {
+      "module": "tests.test_engine",
+      "name": "test_duplicate_approval_does_not_duplicate_comment",
+      "seconds": 0.347,
+      "status": "passed"
+    },
+    {
+      "module": "tests.test_engine",
+      "name": "test_idempotent_submission_survives_restart",
+      "seconds": 0.372,
+      "status": "passed"
+    },
+    {
+      "module": "tests.test_engine",
+      "name": "test_stale_digest_rejected",
+      "seconds": 0.171,
+      "status": "passed"
+    },
+    {
+      "module": "tests.test_engine",
+      "name": "test_repository_change_invalidates_old_task",
+      "seconds": 0.192,
+      "status": "passed"
+    },
+    {
+      "module": "tests.test_engine",
+      "name": "test_tampered_plan_cannot_reuse_approval",
+      "seconds": 0.217,
+      "status": "passed"
+    },
+    {
+      "module": "tests.test_engine",
+      "name": "test_remote_success_local_failure_reconciles_after_restart",
+      "seconds": 0.429,
+      "status": "passed"
+    },
+    {
+      "module": "tests.test_engine",
+      "name": "test_uncertain_absent_result_is_not_retried",
+      "seconds": 0.316,
+      "status": "passed"
+    },
+    {
+      "module": "tests.test_engine",
+      "name": "test_invalid_results_fail_before_write[<lambda>-unsupported_evidence0]",
+      "seconds": 0.2,
+      "status": "passed"
+    },
+    {
+      "module": "tests.test_engine",
+      "name": "test_invalid_results_fail_before_write[<lambda>-unsupported_evidence1]",
+      "seconds": 0.205,
+      "status": "passed"
+    },
+    {
+      "module": "tests.test_engine",
+      "name": "test_invalid_results_fail_before_write[<lambda>-writes_out_of_scope]",
+      "seconds": 0.168,
+      "status": "passed"
+    },
+    {
+      "module": "tests.test_engine",
+      "name": "test_invalid_results_fail_before_write[<lambda>-invalid_assessment]",
+      "seconds": 0.201,
+      "status": "passed"
+    },
+    {
+      "module": "tests.test_engine",
+      "name": "test_invalid_evidence_can_be_repaired_with_bounded_feedback",
+      "seconds": 0.182,
+      "status": "passed"
+    },
+    {
+      "module": "tests.test_engine",
+      "name": "test_model_cannot_expand_permissions[delete_repository-args0-tool_not_allowed]",
+      "seconds": 0.118,
+      "status": "passed"
+    },
+    {
+      "module": "tests.test_engine",
+      "name": "test_model_cannot_expand_permissions[get_issue-args1-tool_scope_violation]",
+      "seconds": 0.12,
+      "status": "passed"
+    },
+    {
+      "module": "tests.test_engine",
+      "name": "test_model_cannot_expand_permissions[get_issue-args2-tool_scope_violation]",
+      "seconds": 0.128,
+      "status": "passed"
+    },
+    {
+      "module": "tests.test_engine",
+      "name": "test_model_budget_stops_infinite_tool_loop",
+      "seconds": 0.227,
+      "status": "passed"
+    },
+    {
+      "module": "tests.test_engine",
+      "name": "test_tool_budget",
+      "seconds": 0.129,
+      "status": "passed"
+    },
+    {
+      "module": "tests.test_engine",
+      "name": "test_approval_cannot_be_bypassed_by_raw_graph_resume",
+      "seconds": 0.17,
+      "status": "passed"
+    },
+    {
+      "module": "tests.test_integrations",
+      "name": "test_mcp_is_independent_process_with_real_discovery",
+      "seconds": 1.231,
+      "status": "passed"
+    },
+    {
+      "module": "tests.test_integrations",
+      "name": "test_github_paginates_comments_without_following_external_urls",
+      "seconds": 0.006,
+      "status": "passed"
+    },
+    {
+      "module": "tests.test_integrations",
+      "name": "test_github_read_retry_but_never_retry_write",
+      "seconds": 0.005,
+      "status": "passed"
+    },
+    {
+      "module": "tests.test_integrations",
+      "name": "test_remote_writes_disabled_by_default",
+      "seconds": 0.006,
+      "status": "passed"
+    },
+    {
+      "module": "tests.test_integrations",
+      "name": "test_deepseek_adapter_uses_correct_endpoint_and_records_usage",
+      "seconds": 1.46,
+      "status": "passed"
+    }
+  ],
+  "note": "Offline tests. Real MCP subprocess; GitHub and DeepSeek adapter tests use mock HTTP. No new paid-model evaluation or remote issue writes."
+}

@@ -2,6 +2,8 @@
 
 本机与模型验证日期：2026-10-01；仓库上传与远端验证跟进：2026-10-02（北京时间）。第一版工程验证与真实模型开发集联调已完成。
 
+2026-10-02 在应用源码 commit e68c6aa8325312ece686c448c454cbfc97eeac81 上重新执行本地检查：pytest 29 passed in 13.77s，Ruff 通过，pip check 无依赖冲突。逐项断言、完成度与验证边界见 [测试报告](test-report-2026-10-02.md)，原始记录见 [tests-2026-10-02.json](../reports/tests-2026-10-02.json)。未重复付费模型评测。再次查询 Actions API，运行列表仍为空，远端测试继续待确认。
+
 运行环境为 Windows / Python 3.13，使用项目独立 .venv，MCP 1.30.0、LangGraph 1.2.12、SQLite checkpoint 3.1.1、OpenAI SDK 2.54.0。完整依赖以锁文件为准。
 
 | 验证 | 实际结果 |
