@@ -1,0 +1,331 @@
+{
+  "catalog_version": 1,
+  "discovery_date": "2026-10-02",
+  "timezone": "Asia/Shanghai",
+  "purpose": "Public issue candidates, not a labeled evaluation set. Metadata only; full snapshots stay local.",
+  "discovery_comments_limit": 10,
+  "selection": "Purposive coverage selection. Not a random sample or production-distribution benchmark.",
+  "model_evaluation_run": false,
+  "remote_issue_writes": false,
+  "cases": [
+    {
+      "id": "A01",
+      "repository": "fastapi/fastapi",
+      "issue_number": 811,
+      "url": "https://github.com/fastapi/fastapi/issues/811",
+      "title": "Sub application startup event never triggered",
+      "tier": "starter",
+      "suggested_checks": [
+        "full_report",
+        "reproduction_code",
+        "expected_actual"
+      ],
+      "state_at_discovery": "closed",
+      "labels_at_discovery": [
+        "bug",
+        "good first issue",
+        "docs",
+        "confirmed",
+        "answered",
+        "reviewed"
+      ],
+      "created_at": "2019-12-22T20:29:28Z",
+      "updated_at": "2023-12-27T07:33:00Z",
+      "fetched_at": "2026-10-02T14:33:33.058133+00:00",
+      "body_chars": 1202,
+      "body_utf8_sha256": "730c6ed175d8d6a8ef5dcb633bbb46ef0601523a4582d3264941650791dcdb08",
+      "reported_comment_count": 12,
+      "discovery_comments_fetched": 10,
+      "discovery_comments_request_status": 200,
+      "discovery_comments_complete_by_count": false,
+      "annotation_status": "pending_human_review",
+      "gold": null
+    },
+    {
+      "id": "A02",
+      "repository": "fastapi/fastapi",
+      "issue_number": 240,
+      "url": "https://github.com/fastapi/fastapi/issues/240",
+      "title": "exclusiveMinimum and exclusiveMaximum should be boolean",
+      "tier": "starter",
+      "suggested_checks": [
+        "schema_report",
+        "expected_actual",
+        "environment"
+      ],
+      "state_at_discovery": "closed",
+      "labels_at_discovery": [
+        "bug",
+        "question",
+        "investigate",
+        "reviewed",
+        "question-migrate"
+      ],
+      "created_at": "2019-05-19T23:47:37Z",
+      "updated_at": "2023-02-28T19:04:36Z",
+      "fetched_at": "2026-10-02T14:30:44.864421+00:00",
+      "body_chars": 616,
+      "body_utf8_sha256": "75549b4ba5b7cc272028da3258c351afe566efc2d31b4c09c115b35544a92cbe",
+      "reported_comment_count": 14,
+      "discovery_comments_fetched": 10,
+      "discovery_comments_request_status": 200,
+      "discovery_comments_complete_by_count": false,
+      "annotation_status": "pending_human_review",
+      "gold": null
+    },
+    {
+      "id": "A03",
+      "repository": "fastapi/fastapi",
+      "issue_number": 680,
+      "url": "https://github.com/fastapi/fastapi/issues/680",
+      "title": "Status 502: [WARNING] Invalid HTTP request received.",
+      "tier": "starter",
+      "suggested_checks": [
+        "insufficient_reproduction",
+        "brief_information",
+        "comments"
+      ],
+      "state_at_discovery": "closed",
+      "labels_at_discovery": [
+        "question",
+        "answered",
+        "reviewed",
+        "question-migrate"
+      ],
+      "created_at": "2019-11-05T06:25:38Z",
+      "updated_at": "2023-02-28T11:33:44Z",
+      "fetched_at": "2026-10-02T14:30:44.734141+00:00",
+      "body_chars": 958,
+      "body_utf8_sha256": "315c0eb53a6c254a43bf3562a718946933a09925664e40b7f3d1ac8fc44ed12e",
+      "reported_comment_count": 11,
+      "discovery_comments_fetched": 10,
+      "discovery_comments_request_status": 200,
+      "discovery_comments_complete_by_count": false,
+      "annotation_status": "pending_human_review",
+      "gold": null
+    },
+    {
+      "id": "A04",
+      "repository": "langchain-ai/langgraph",
+      "issue_number": 8204,
+      "url": "https://github.com/langchain-ai/langgraph/issues/8204",
+      "title": "create_react_agent aborts return_direct=True tools with \"need more steps\" when remaining_steps == 1",
+      "tier": "starter",
+      "suggested_checks": [
+        "code_evidence",
+        "explicit_expected_actual",
+        "environment"
+      ],
+      "state_at_discovery": "open",
+      "labels_at_discovery": [
+        "bug",
+        "external"
+      ],
+      "created_at": "2026-06-27T11:16:16Z",
+      "updated_at": "2026-09-09T10:27:15Z",
+      "fetched_at": "2026-10-02T14:31:05.851404+00:00",
+      "body_chars": 3536,
+      "body_utf8_sha256": "15fc45a9d66de661434d330a46a066f70e068fab48644745b4f3894286ba9db7",
+      "reported_comment_count": 16,
+      "discovery_comments_fetched": 10,
+      "discovery_comments_request_status": 200,
+      "discovery_comments_complete_by_count": false,
+      "annotation_status": "pending_human_review",
+      "gold": null
+    },
+    {
+      "id": "A05",
+      "repository": "langchain-ai/langgraph",
+      "issue_number": 8582,
+      "url": "https://github.com/langchain-ai/langgraph/issues/8582",
+      "title": "Failed Send task loses UntrackedValue input when resumed from checkpoint",
+      "tier": "starter",
+      "suggested_checks": [
+        "recovery_report",
+        "environment_ambiguity",
+        "long_code"
+      ],
+      "state_at_discovery": "open",
+      "labels_at_discovery": [
+        "external"
+      ],
+      "created_at": "2026-08-10T01:06:11Z",
+      "updated_at": "2026-08-17T10:58:26Z",
+      "fetched_at": "2026-10-02T14:31:06.856795+00:00",
+      "body_chars": 4353,
+      "body_utf8_sha256": "1171a0d2b617e4e8feb8ddb6d5bf683a4c2639768fbd33f2027ef972b28ad98c",
+      "reported_comment_count": 2,
+      "discovery_comments_fetched": 2,
+      "discovery_comments_request_status": 200,
+      "discovery_comments_complete_by_count": true,
+      "annotation_status": "pending_human_review",
+      "gold": null
+    },
+    {
+      "id": "A06",
+      "repository": "langchain-ai/langgraph",
+      "issue_number": 8026,
+      "url": "https://github.com/langchain-ai/langgraph/issues/8026",
+      "title": "[Feature Request]: Add a high-level ApprovalNode for Human-in-the-Loop workflows",
+      "tier": "starter",
+      "suggested_checks": [
+        "feature_request",
+        "label_intent_conflict",
+        "template_noise"
+      ],
+      "state_at_discovery": "open",
+      "labels_at_discovery": [
+        "bug",
+        "external"
+      ],
+      "created_at": "2026-06-09T11:46:56Z",
+      "updated_at": "2026-10-02T11:21:27Z",
+      "fetched_at": "2026-10-02T14:33:33.353077+00:00",
+      "body_chars": 2138,
+      "body_utf8_sha256": "2d7e240fb7c1395981d54bc7ffc95f2e799cb9b3c503405293df01f3a06038e2",
+      "reported_comment_count": 55,
+      "discovery_comments_fetched": 10,
+      "discovery_comments_request_status": 200,
+      "discovery_comments_complete_by_count": false,
+      "annotation_status": "pending_human_review",
+      "gold": null
+    },
+    {
+      "id": "A07",
+      "repository": "langchain-ai/langgraph",
+      "issue_number": 7345,
+      "url": "https://github.com/langchain-ai/langgraph/issues/7345",
+      "title": "Feature request: Configurable PostgreSQL schema for langgraph-checkpoint-postgres (parity with LangGraphJS)",
+      "tier": "starter",
+      "suggested_checks": [
+        "feature_request",
+        "acceptance_criteria",
+        "environment_not_required"
+      ],
+      "state_at_discovery": "open",
+      "labels_at_discovery": [
+        "external"
+      ],
+      "created_at": "2026-03-30T04:31:50Z",
+      "updated_at": "2026-09-17T10:22:24Z",
+      "fetched_at": "2026-10-02T14:33:33.138687+00:00",
+      "body_chars": 2888,
+      "body_utf8_sha256": "495f8a83d5f4b254ca3b62cada6ffabf61033e2f0e3712c278d957905c4b4a3f",
+      "reported_comment_count": 12,
+      "discovery_comments_fetched": 10,
+      "discovery_comments_request_status": 200,
+      "discovery_comments_complete_by_count": false,
+      "annotation_status": "pending_human_review",
+      "gold": null
+    },
+    {
+      "id": "A08",
+      "repository": "langchain-ai/langgraph",
+      "issue_number": 69,
+      "url": "https://github.com/langchain-ai/langgraph/issues/69",
+      "title": "[Feature Request] Automatic graph image generation",
+      "tier": "starter",
+      "suggested_checks": [
+        "short_feature_request",
+        "image_comments"
+      ],
+      "state_at_discovery": "closed",
+      "labels_at_discovery": [],
+      "created_at": "2024-01-27T18:36:19Z",
+      "updated_at": "2024-07-17T15:19:42Z",
+      "fetched_at": "2026-10-02T14:33:34.251049+00:00",
+      "body_chars": 304,
+      "body_utf8_sha256": "573f33bb8780ee3ef630a3311d54661d95de676353eb560866f4280aed8e8b3f",
+      "reported_comment_count": 13,
+      "discovery_comments_fetched": 10,
+      "discovery_comments_request_status": 200,
+      "discovery_comments_complete_by_count": false,
+      "annotation_status": "pending_human_review",
+      "gold": null
+    },
+    {
+      "id": "A09",
+      "repository": "encode/httpx",
+      "issue_number": 3782,
+      "url": "https://github.com/encode/httpx/issues/3782",
+      "title": "Potential Issue: `AsyncClient.stream` double-cancel may leak active connections",
+      "tier": "stress",
+      "suggested_checks": [
+        "long_body",
+        "logs",
+        "comment_environment"
+      ],
+      "state_at_discovery": "open",
+      "labels_at_discovery": [],
+      "created_at": "2026-02-26T10:17:16Z",
+      "updated_at": "2026-09-23T07:44:50Z",
+      "fetched_at": "2026-10-02T14:31:05.421650+00:00",
+      "body_chars": 8241,
+      "body_utf8_sha256": "ce3c81faa2f56068cde7695396bd35d73bb886cdfcc953ab5852b9d747e33262",
+      "reported_comment_count": 3,
+      "discovery_comments_fetched": 2,
+      "discovery_comments_request_status": 200,
+      "discovery_comments_complete_by_count": false,
+      "annotation_status": "pending_human_review",
+      "gold": null
+    },
+    {
+      "id": "A10",
+      "repository": "langchain-ai/langgraph",
+      "issue_number": 8408,
+      "url": "https://github.com/langchain-ai/langgraph/issues/8408",
+      "title": "Studio trace node details fail because incorrect run_id is requested (404)",
+      "tier": "stress",
+      "suggested_checks": [
+        "long_body",
+        "long_comments",
+        "multiple_environment_descriptions"
+      ],
+      "state_at_discovery": "closed",
+      "labels_at_discovery": [
+        "bug",
+        "external"
+      ],
+      "created_at": "2026-07-22T08:03:46Z",
+      "updated_at": "2026-09-16T09:59:22Z",
+      "fetched_at": "2026-10-02T14:31:07.040631+00:00",
+      "body_chars": 6664,
+      "body_utf8_sha256": "e97421db3d86c48efc644ff7741e01e0456befc69478c178b3465d5af542b84e",
+      "reported_comment_count": 13,
+      "discovery_comments_fetched": 10,
+      "discovery_comments_request_status": 200,
+      "discovery_comments_complete_by_count": false,
+      "annotation_status": "pending_human_review",
+      "gold": null
+    },
+    {
+      "id": "A11",
+      "repository": "langchain-ai/langgraph",
+      "issue_number": 8039,
+      "url": "https://github.com/langchain-ai/langgraph/issues/8039",
+      "title": "durability=\"sync\": put_writes/put persistence order is unenforced, so post-crash recovery (replay vs re-execute) is host-dependent",
+      "tier": "stress",
+      "suggested_checks": [
+        "very_long_body",
+        "many_comments",
+        "context_budget"
+      ],
+      "state_at_discovery": "open",
+      "labels_at_discovery": [
+        "bug",
+        "external"
+      ],
+      "created_at": "2026-06-10T16:09:51Z",
+      "updated_at": "2026-09-26T13:14:09Z",
+      "fetched_at": "2026-10-02T14:31:07.110036+00:00",
+      "body_chars": 14590,
+      "body_utf8_sha256": "b9f01bfaf5f7175dc3d2c6052291f617af1a9bae15d27c3ed53fd901c676bdfe",
+      "reported_comment_count": 48,
+      "discovery_comments_fetched": 10,
+      "discovery_comments_request_status": 200,
+      "discovery_comments_complete_by_count": false,
+      "annotation_status": "pending_human_review",
+      "gold": null
+    }
+  ]
+}

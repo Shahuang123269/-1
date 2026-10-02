@@ -8,6 +8,8 @@
 
 了解每项功能的完成状态、测试断言和未验证范围，阅读 [2026-10-02 测试报告](docs/test-report-2026-10-02.md)；学习目录、调用链和各模块核心代码，阅读 [整体结构与核心代码解读](docs/code-guide.md)。
 
+公开工单候选、只读采集和标注方法见 [真实数据起步](docs/real-data-starter.md)；从运行到排错、修改和面试解释的练习见 [项目掌握练习](docs/study-lab.md)。
+
 ## 快速运行
 
 Python 3.13 为当前验证环境。Windows PowerShell：
