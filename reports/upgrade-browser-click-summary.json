@@ -1,0 +1,34 @@
+{
+  "observed_at": "2026-10-08T18:53:12.091749+08:00",
+  "mode": "fixture",
+  "browser": "Google Chrome",
+  "automation": "Windows-MCP",
+  "scope": "actual desktop clicks plus read-only API and fixture output checks",
+  "completed_task_id": "363aa5ac6e77490dab627102d24aae7c",
+  "rejected_task_id": "00b7cc6a2c52455e8828e0d1e927b235",
+  "plan_versions": [
+    1,
+    2
+  ],
+  "approved_version": 2,
+  "approved_digest": "c6b0691de0b12b832614b0296f4b4c554d07b0ba13f3a28bf8cbce9fa77759b0",
+  "verified_actions": 2,
+  "fixture_comment_count": 1,
+  "rejected_task_action_count": 0,
+  "cases": [
+    "submit and poll to awaiting_approval",
+    "edit comment and observe disabled approval until saved",
+    "save creates v2",
+    "approve v2 and poll to completed",
+    "view v1/v2 and approval digest in history",
+    "reload, refresh task list and reopen completed task",
+    "create another investigation and reject to cancelled",
+    "verify exact edited comment once and no outputs from rejected task"
+  ],
+  "limitations": [
+    "local fixture only",
+    "no real GitHub writes",
+    "not an automated browser regression suite",
+    "no mobile, multi-browser or all error paths covered"
+  ]
+}

@@ -29,3 +29,9 @@ IA_HTTP_TRUST_ENV=false
 参考：https://learn.chatgpt.com/docs/windows/windows-sandbox （Troubleshooting and FAQ）。
 
 本轮没有修改 Codex 全局配置、系统代理、系统 Python 或用户目录 ACL，也没有结束其他用户程序。临时测试服务在核实进程命令行后关闭。
+
+## Windows-MCP 替代验证（已完成）
+
+用户安装并授权使用 Windows-MCP 后，插件能够读取桌面和操作 Chrome。2026-10-08 已用它完成本地工作台的提交调查、编辑评论、保存 v2、批准执行、拒绝另一方案和刷新后查询；详情见 [升级验收报告](upgrade-verification-2026-10-08.md)。
+
+这使本次页面验收可以继续进行，但不代表原 Codex 内置浏览器工具的文件占用问题已经修复。若继续使用 Windows-MCP，无需为本次验收重装 Python 或更改权限；需要原浏览器工具时，再按上述步骤释放占用并复验。
