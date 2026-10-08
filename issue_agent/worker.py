@@ -1,6 +1,7 @@
-﻿"""A single graph owner. API processes only persist commands."""
+"""A single graph owner. API processes only persist commands."""
 import asyncio
 import os
+import signal
 from contextlib import asynccontextmanager
 
 from .config import Settings
@@ -96,8 +97,17 @@ async def running_worker(settings):
 
 
 async def main():
-    async with running_worker(Settings()):
-        await asyncio.Event().wait()
+    shutdown = asyncio.Event()
+    loop = asyncio.get_running_loop()
+    signals = (signal.SIGTERM, signal.SIGINT) if os.name != "nt" else ()
+    for sig in signals:
+        loop.add_signal_handler(sig, shutdown.set)
+    try:
+        async with running_worker(Settings()):
+            await shutdown.wait()
+    finally:
+        for sig in signals:
+            loop.remove_signal_handler(sig)
 
 
 if __name__ == "__main__":

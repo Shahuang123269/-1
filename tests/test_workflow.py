@@ -257,3 +257,35 @@ async def test_closed_after_approval_is_stale(tmp_path):
         result = await e.approve(task['id'], task['digest'], 'approve')
         assert result['status'] == 'needs_review'
         assert await e.remote.list_comments(2) == []
+
+async def test_worker_shutdown_signal_drains_context(monkeypatch):
+    import asyncio
+    import signal
+    from contextlib import asynccontextmanager
+
+    import issue_agent.worker as worker
+
+    events = []
+    callbacks = {}
+    class Loop:
+        def add_signal_handler(self, sig, callback):
+            callbacks[sig] = callback
+        def remove_signal_handler(self, sig):
+            events.append(('removed', sig))
+    real_loop = asyncio.get_running_loop()
+    monkeypatch.setattr(worker.os, 'name', 'posix')
+    monkeypatch.setattr(worker.asyncio, 'get_running_loop', lambda: Loop())
+    # Schedule on the real loop while keeping registration observable.
+    @asynccontextmanager
+    async def fake_running(settings):
+        events.append('entered')
+        real_loop.call_soon(callbacks[signal.SIGTERM])
+        try:
+            yield object()
+        finally:
+            events.append('drained')
+    monkeypatch.setattr(worker, 'running_worker', fake_running)
+    monkeypatch.setattr(worker, 'Settings', lambda: object())
+    await worker.main()
+    assert events[:2] == ['entered', 'drained']
+    assert set(events[2:]) == {('removed', signal.SIGTERM), ('removed', signal.SIGINT)}
