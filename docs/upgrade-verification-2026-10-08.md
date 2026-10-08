@@ -18,7 +18,14 @@
 | 本机 Docker | 未运行 | 未检测到 docker 命令；容器验证交由 GitHub CI |
 | 真实 GitHub 发布闭环、维护者试用 | 未执行 | 不能声称生产可用或实际节省工时 |
 
-最新 CI 结果在报告后部更新；在确认前，不把“配置了工作流”视为“部署已验证”。
+最新代码验收 CI 已完成：**Windows、Ubuntu 均成功**。
+
+- CI：https://github.com/Shahuang123269/-1/actions/runs/37711149546
+- 验证代码 commit：`19b2da9ecc3a6a1b1d39b5bcdc1eebe8a1d21dee`。
+- 两个平台均完成代码检查、50 项测试和 40 例离线回归。
+- Linux 额外完成 Docker 构建、镜像内演示、Compose 独立 API/Worker 真实 HTTP 验收。
+- Worker 收到停止信号后在 15 秒停止窗口内正常退出，容器退出码为 0；此验证确认正常停机，不等于证明所有中断点都不会失败。
+- 本报告后续提交只补验收记录，没有改变以上代码。
 
 ## 本轮新增的关键验收
 
