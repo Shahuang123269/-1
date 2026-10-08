@@ -1,4 +1,4 @@
-﻿"""Frozen public issue replay. No writes; no accuracy claims without human gold."""
+"""Frozen public issue replay. No writes; no accuracy claims without human gold."""
 import argparse
 import asyncio
 import json
@@ -137,7 +137,8 @@ async def run_method(case, method, args, settings):
             calls = [e for e in events if e["kind"] == "model_call"]
             return {"result": task["result"] or {}, "error": task["error"],
                     "model_calls": len(calls),
-                    "total_tokens": sum(e["payload"]["usage"].get("total_tokens", 0) for e in calls),
+                    "total_tokens": None if task["error"] == "model_unavailable" else sum(
+                        e["payload"]["usage"].get("total_tokens", 0) for e in calls),
                     "elapsed_ms": round((time.monotonic() - start) * 1000)}
 
 
