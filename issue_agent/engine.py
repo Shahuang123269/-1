@@ -13,10 +13,11 @@ from typing_extensions import TypedDict
 
 from .config import Settings
 from .connectors import connector, verify_action
-from .domain import Assessment, DomainError, TaskRequest, action_digest, canonical
+from .domain import Assessment, DomainError, TaskRequest, canonical
 from .mcp_client import MCPTools
 from .models import SYSTEM_PROMPT, DeepSeekModel, FixtureModel
-from .store import Store
+from .policy import RepositoryPolicy, input_snapshot, load_policy, plan_digest
+from .workflow_store import WorkflowStore
 
 
 class State(TypedDict, total=False):
@@ -37,7 +38,7 @@ class State(TypedDict, total=False):
 class Engine:
     def __init__(self, settings: Settings, *, model=None, tools=None, remote=None):
         self.settings = settings
-        self.store = Store(settings.data_dir / "tasks.sqlite")
+        self.store = WorkflowStore(settings.data_dir / "tasks.sqlite")
         self.store.interrupted()
         self.model = model
         self.tools = tools
@@ -109,6 +110,10 @@ class Engine:
         if len(canonical(state["messages"])) > self.settings.max_context_chars:
             raise DomainError("context_budget_exceeded")
         parameters = Assessment.model_json_schema()
+        policy = RepositoryPolicy.model_validate(state["request"]["policy"])
+        parameters["$defs"]["Action"]["properties"]["labels"]["items"] = {
+            "type": "string", "enum": policy.allowed_labels,
+        }
         if not state["request"]["propose_actions"]:
             parameters["properties"]["actions"].update(
                 maxItems=0, description="Read-only task: must be an empty array."
@@ -239,54 +244,100 @@ class Engine:
                 sources[r["source"]] = r["title"] + "\n" + r["body"]
             if o["name"] == "list_issue_comments":
                 sources.update({c["source"]: c["body"] for c in o["result"]["comments"]})
-        for evidence in result["evidence"]:
+        for evidence in result["evidence"] + [
+            e for f in result["field_findings"] for e in f["evidence"]
+        ]:
             if evidence["quote"] not in sources.get(evidence["source"], ""):
                 return self.validation_feedback(state, "unsupported_evidence", sources)
         if result["actions"] and not state["request"]["propose_actions"]:
             raise DomainError("writes_out_of_scope")
-        for action in result["actions"]:
-            if (
-                action["kind"] == "comment" and (not action["body"].strip() or action["labels"])
-            ) or (action["kind"] == "add_labels" and (action["body"] or not action["labels"])):
-                raise DomainError("invalid_action")
-        digest = action_digest(
-            self.settings.repository, state["request"]["issue_number"], result["actions"]
-        )
+        policy = RepositoryPolicy.model_validate(state["request"]["policy"])
+        policy.validate_actions(result["actions"])
+        findings = result["field_findings"]
+        if result["category"] == "bug":
+            if (len(findings) != len(policy.required_fields)
+                    or {f["field"] for f in findings} != set(policy.required_fields)
+                    or {f["field"] for f in findings if f["status"] == "missing"}
+                    != set(result["missing_fields"])):
+                return self.validation_feedback(state, "invalid_field_findings", sources)
+            for finding in findings:
+                count = len({(e["source"], e["quote"]) for e in finding["evidence"]})
+                if ((finding["status"] != "missing" and count == 0)
+                        or (finding["status"] == "conflicting" and count < 2)
+                        or (finding["status"] == "missing" and count > 0)):
+                    return self.validation_feedback(state, "invalid_field_findings", sources)
+        elif result["category"] == "enhancement" and (findings or result["missing_fields"]):
+            return self.validation_feedback(state, "invalid_field_findings", sources)
+        if not set(result["missing_fields"]).issubset(policy.required_fields):
+            return self.validation_feedback(state, "field_outside_policy", sources)
+        issue = next(o["result"] for o in reversed(observations) if o["name"] == "get_issue")
+        if issue.get("state") == "closed" and result["actions"]:
+            raise DomainError("issue_closed")
+        comments = next(o["result"]["comments"] for o in reversed(observations)
+                        if o["name"] == "list_issue_comments")
+        context = {"input": input_snapshot(issue, comments), "policy": policy.model_dump()}
+        plan = self.store.save_plan(state["task_id"], result, context)
         status = "awaiting_approval" if result["actions"] else "completed"
-        self.store.update(state["task_id"], status, result=result, digest=digest)
-        return {"result": result, "digest": digest, "status": status, "validation_retry": False}
+        return {"result": result, "digest": plan["digest"], "status": status,
+                "validation_retry": False}
+
+    def validate_checkpoint_plan(self, state):
+        try:
+            plan = self.store.plan(state["task_id"], state["digest"])
+        except DomainError:
+            raise DomainError("approval_required") from None
+        digest = plan_digest(state["task_id"], plan["version"], state["request"],
+                             state["result"], plan["context"])
+        if digest != state["digest"] or state["result"] != plan["result"]:
+            raise DomainError("approval_required")
+        return plan
 
     async def approval_node(self, state: State):
-        decision = interrupt(
-            {
-                "repository": self.settings.repository,
-                "issue_number": state["request"]["issue_number"],
-                "actions": state["result"]["actions"],
-                "digest": state["digest"],
-            }
-        )
-        # A resume value alone grants no authority; require a durable API approval.
-        stored = self.store.decision(state["task_id"], state["digest"])
+        decision = interrupt({"task_id": state["task_id"], "digest": state["digest"]})
+        # The paused graph may refer to v1; edits create immutable v2 in the business DB.
+        # Validate the old checkpoint, then load the precise version approved by the owner.
+        self.validate_checkpoint_plan(state)
+        task = self.store.task(state["task_id"])
+        if task["status"] == "needs_review":
+            raise DomainError("input_changed")
+        plan = self.store.plan(state["task_id"], task["digest"])
+        stored = self.store.decision(state["task_id"], plan["digest"])
         if stored is None or decision != stored:
             raise DomainError("approval_required")
         if stored == "reject":
             self.store.update(state["task_id"], "cancelled")
-        return {
-            "approved": stored == "approve",
-            "status": "executing" if stored == "approve" else "cancelled",
-        }
+        return {"approved": stored == "approve", "result": plan["result"],
+                "digest": plan["digest"],
+                "status": "executing" if stored == "approve" else "cancelled"}
+
+    async def check_freshness(self, task_id, plan):
+        if load_policy(self.settings.policy_path).model_dump() != plan["context"]["policy"]:
+            raise DomainError("policy_changed")
+        task = self.store.task(task_id)
+        number = task["request"]["issue_number"]
+        own_bodies = [a["action"]["body"] + f"\n\n<!-- issue-agent:{a['operation_id']} -->"
+                      for a in task["actions"] if a["action"]["kind"] == "comment"
+                      and a["status"] in {"inflight", "uncertain", "verified"}]
+        issue = await self.remote.get_issue(number)
+        comments = await self.remote.list_comments(number)
+        if input_snapshot(issue, comments, own_bodies) != plan["context"]["input"]:
+            raise DomainError("input_changed")
 
     async def execute_node(self, state: State):
         task_id, issue_number = state["task_id"], state["request"]["issue_number"]
         task = self.store.task(task_id)
         actions = state["result"]["actions"]
-        digest = action_digest(self.settings.repository, issue_number, actions)
+        plan = self.validate_checkpoint_plan(state)
+        digest = plan["digest"]
         if (
             digest != state["digest"]
             or digest != task["digest"]
             or (self.store.decision(task_id, digest) != "approve")
         ):
             raise DomainError("approval_required")
+        if task["status"] == "needs_review":
+            raise DomainError("input_changed")
+        await self.check_freshness(task_id, plan)
         self.store.update(task_id, "executing")
         for index, action in enumerate(actions):
             operation_id = f"{task_id}:{digest[:12]}:{index}"
@@ -301,6 +352,8 @@ class Engine:
                 continue
             if record["status"] in {"inflight", "uncertain"}:
                 raise DomainError("write_uncertain")
+            # Recheck before each new side effect, including after recovery.
+            await self.check_freshness(task_id, plan)
             self.store.action_status(operation_id, "inflight")
             try:
                 await self.remote.write(issue_number, action, marker)
@@ -333,6 +386,8 @@ class Engine:
                 if e.code == "write_uncertain" or pending_effect
                 else "failed"
             )
+            if e.code in {"input_changed", "policy_changed"} and not pending_effect:
+                status = "needs_review"
             self.store.update(task_id, status, error=e.code)
         except Exception as e:
             # A worker crash may leave a remote side effect. Never retry it blindly.
@@ -351,25 +406,34 @@ class Engine:
             ):
                 raise DomainError("invalid_submission_key")
             payload = request.model_dump()
-            payload.update(repository=self.settings.repository, tool_mode=self.settings.tool_mode)
+            payload.update(repository=self.settings.repository, tool_mode=self.settings.tool_mode,
+                           policy=load_policy(self.settings.policy_path).model_dump())
             task_id, created = self.store.create(payload, idempotency_key)
             if not created:
                 return self.store.task(task_id)
-            self.store.update(task_id, "running")
-            return await self.drive(
-                task_id,
-                {
-                    "task_id": task_id,
-                    "request": payload,
-                    "messages": [
-                        {"role": "system", "content": SYSTEM_PROMPT},
-                        {"role": "user", "content": canonical(payload)},
-                    ],
-                    "observations": [],
-                    "model_calls": 0,
-                    "tool_calls": 0,
-                },
-            )
+            return await self.start_existing(task_id)
+
+    async def start_existing(self, task_id):
+        self.check_scope(task_id)
+        task = self.store.task(task_id)
+        snapshot = await self.graph.aget_state(self.config(task_id))
+        if snapshot.values:
+            if task["status"] in {"completed", "cancelled", "failed", "needs_review"}:
+                return task
+            if any(t.interrupts for t in snapshot.tasks):
+                # A crash after proposal persistence may leave the last node to checkpoint.
+                return task
+            if snapshot.next:
+                return await self.drive(task_id, None)
+            return task
+        payload = task["request"]
+        self.store.update(task_id, "running")
+        return await self.drive(task_id, {
+            "task_id": task_id, "request": payload,
+            "messages": [{"role": "system", "content": SYSTEM_PROMPT},
+                         {"role": "user", "content": canonical(payload)}],
+            "observations": [], "model_calls": 0, "tool_calls": 0,
+        })
 
     async def approve(self, task_id: str, digest: str, decision: str):
         async with self.lock:

@@ -8,6 +8,7 @@ import argparse
 import asyncio
 import sqlite3
 import tempfile
+import time
 from pathlib import Path
 
 from fastapi.testclient import TestClient
@@ -65,13 +66,30 @@ def api_lab():
             bad = client.post("/tasks", json={"issue_number": -1})
             print("api: invalid issue number", bad.status_code)
             request = {"issue_number": 2, "propose_actions": True}
-            task = client.post("/tasks", json=request).json()
+            response = client.post("/tasks", json=request)
+            print("api: submission response", response.status_code, "accepted, not finished")
+            task = response.json()
+            deadline = time.monotonic() + 20
+            while task["status"] not in {"awaiting_approval", "failed"}:
+                if time.monotonic() > deadline:
+                    raise RuntimeError("worker_timeout")
+                time.sleep(0.05)
+                task = client.get(f"/tasks/{task['id']}").json()
             print("api: created task", task["status"])
             rejected = client.post(
                 f"/tasks/{task['id']}/approval",
                 json={"digest": task["digest"], "decision": "reject"},
             )
-            print("api: rejection response", rejected.status_code, rejected.json()["status"])
+            print("api: rejection accepted", rejected.status_code)
+            deadline = time.monotonic() + 20
+            while True:
+                final = client.get(f"/tasks/{task['id']}").json()
+                if final["status"] in {"cancelled", "failed"}:
+                    print("api: final state", final["status"])
+                    break
+                if time.monotonic() > deadline:
+                    raise RuntimeError("worker_timeout")
+                time.sleep(0.05)
 
 
 if __name__ == "__main__":

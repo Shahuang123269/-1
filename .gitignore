@@ -11,3 +11,6 @@ reports/local-*
 pytest-of-*/
 build/
 dist/
+
+.test-runs/
+.upgrade-edit.py

@@ -1,7 +1,19 @@
+import time
+
 from fastapi.testclient import TestClient
 
 from issue_agent.api import create_app
 from issue_agent.config import Settings
+
+
+def wait_task(client, task, headers=None):
+    until = time.monotonic() + 15
+    while time.monotonic() < until:
+        task = client.get(f"/tasks/{task['id']}", headers=headers or {}).json()
+        if task["status"] in {"completed", "awaiting_approval", "failed", "cancelled"}:
+            return task
+        time.sleep(0.02)
+    raise AssertionError("task did not settle")
 
 
 def test_api_task_approval_events_and_sse(tmp_path):
@@ -9,6 +21,7 @@ def test_api_task_approval_events_and_sse(tmp_path):
         assert client.get("/health").json()["tool_mode"] == "fixture"
         assert client.post("/tasks", json={"issue_number": -1}).status_code == 422
         task = client.post("/tasks", json={"issue_number": 2, "propose_actions": True}).json()
+        task = wait_task(client, task)
         assert task["status"] == "awaiting_approval"
         stale = client.post(
             f"/tasks/{task['id']}/approval", json={"digest": "0" * 64, "decision": "approve"}
@@ -17,6 +30,7 @@ def test_api_task_approval_events_and_sse(tmp_path):
         completed = client.post(
             f"/tasks/{task['id']}/approval", json={"digest": task["digest"], "decision": "approve"}
         ).json()
+        completed = wait_task(client, completed)
         assert completed["status"] == "completed"
         response = client.get(f"/tasks/{task['id']}/stream")
         assert response.headers["content-type"].startswith("text/event-stream")
@@ -35,7 +49,7 @@ def test_auth_and_cross_origin_protection(tmp_path):
         assert client.post("/tasks", json={"issue_number": 1}).status_code == 401
         auth = {"Authorization": "Bearer test-only-api-token"}
         assert (
-            client.post("/tasks", json={"issue_number": 1}, headers=auth).json()["status"]
+            wait_task(client, client.post("/tasks", json={"issue_number": 1}, headers=auth).json(), auth)["status"]
             == "completed"
         )
         assert (

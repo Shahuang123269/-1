@@ -29,7 +29,7 @@ class MCPTools:
             IA_TOOL_MODE=self.settings.tool_mode,
             IA_REPOSITORY=self.settings.repository,
             IA_DATA_DIR=str(self.settings.data_dir.resolve()),
-            IA_GITHUB_TOKEN=self.settings.github_token.get_secret_value(),
+            IA_GITHUB_TOKEN=(self.settings.github_read_token.get_secret_value() or self.settings.github_token.get_secret_value()),
             IA_TIMEOUT_SECONDS=str(self.settings.timeout_seconds),
             PYTHONIOENCODING="utf-8",
         )

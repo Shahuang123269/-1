@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "issue-agent"
-version = "0.1.0"
+version = "0.2.0"
 description = "Auditable GitHub issue triage with DeepSeek, LangGraph and MCP"
 requires-python = ">=3.11"
 dependencies = [
@@ -28,7 +28,7 @@ testpaths = ["tests"]
 
 [tool.ruff]
 line-length = 100
-extend-exclude = ["examples/original-demo"]
+extend-exclude = [".test-runs", "examples/original-demo"]
 
 [tool.ruff.lint]
 select = ["E4", "E7", "E9", "F", "I"]

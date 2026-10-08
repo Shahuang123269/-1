@@ -165,6 +165,7 @@ class GitHubConnector:
             "body": r["body"] or "",
             "labels": [x["name"] for x in r["labels"]],
             "source": r["html_url"],
+            "state": r.get("state", "open"),
         }
 
     async def list_issues(self):

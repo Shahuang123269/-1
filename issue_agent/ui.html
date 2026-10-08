@@ -1,36 +1,37 @@
 <!doctype html>
 <html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Issue Agent · 任务工作台</title>
+<title>Issue Agent · 审阅工作台</title>
 <style>
-body{font:15px/1.7 system-ui;background:#f4f6fa;color:#202838;margin:0}main{max-width:940px;margin:40px auto;padding:0 20px}
-h1{margin-bottom:0}p{color:#617086}section{background:white;padding:24px;margin-top:20px;border-radius:12px;border:1px solid #dce3ed}
-input,button{font:inherit;padding:9px;border:1px solid #cbd5e1;border-radius:6px}button{cursor:pointer;background:#254ec7;color:white;margin-right:8px}
-button.secondary{background:#fff;color:#254ec7}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:13px/1.6 ui-monospace,monospace;background:#f4f6fa;padding:15px}
-.row{display:flex;gap:12px;flex-wrap:wrap;margin:14px 0}#error{color:#b91c1c}.badge{background:#e9efff;padding:5px 10px;border-radius:5px}
+:root{font:15px/1.6 system-ui;color:#1b2c43;background:#f3f6fa}body{margin:0}main{max-width:1160px;margin:32px auto;padding:0 20px}h1{margin-bottom:0}h2{font-size:19px}p{color:#53647b}section{background:white;border:1px solid #dbe3ee;padding:22px;border-radius:12px;margin:18px 0}input,textarea,button,select{font:inherit;padding:9px;border:1px solid #b7c6db;border-radius:6px}textarea{width:100%;box-sizing:border-box;min-height:120px}button{background:#2455be;color:white;cursor:pointer}button.secondary{background:white;color:#2455be}button:disabled{opacity:.45;cursor:wait}.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.grid{display:grid;grid-template-columns:300px 1fr;gap:18px}#error{color:#b42318;white-space:pre-wrap}.task{display:block;width:100%;text-align:left;margin:8px 0;background:#f5f8fd;color:#193f77}.badge{background:#eaf0fc;border-radius:4px;padding:5px 9px}pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px;background:#f6f8fa;padding:12px}blockquote{margin:8px 0;padding:8px 12px;border-left:3px solid #a4bce6;background:#f8faff;white-space:pre-wrap}small{color:#64748b}.finding{margin:15px 0}label{display:block}details{margin-top:15px}@media(max-width:800px){.grid{grid-template-columns:1fr}}
 </style>
-<main><h1>Issue Agent</h1><p>调查 → 建议 → 审批 → 执行 → 读回核验</p><span id="mode" class="badge"></span>
-<section><h2>提交任务</h2><div class="row"><input id="issue" type="number" min="1" value="2" aria-label="Issue 编号">
-<input id="goal" value="检查 Bug 信息完整性并提出处理建议" style="flex:1" aria-label="任务目标"></div>
-<label><input id="write" type="checkbox"> 起草评论与标签操作，执行前需审批</label>
-<div class="row"><input id="token" type="password" placeholder="配置了 API token 时填写" autocomplete="off" aria-label="API token">
-<button id="create">开始调查</button><button id="newtask" class="secondary">新建任务</button></div><div id="error" role="alert"></div></section>
-<section><h2>任务与审批</h2><div class="row"><input id="taskid" placeholder="任务 ID，重启后可在这里恢复查询" style="flex:1"><button id="load" class="secondary">查询</button></div>
-<div id="status"></div><pre id="result">提交任务后显示调查建议和待审动作。</pre><div id="approval" hidden>
-<p>请核对仓库、Issue 编号和下方完整操作内容；批准将执行这些操作。</p><pre id="actions"></pre>
-<button id="approve">批准这些操作</button><button id="reject" class="secondary">拒绝</button></div>
-<button id="resume" class="secondary" hidden>核对并恢复</button></section>
-<section><h2>执行记录</h2><pre id="events">暂无记录</pre></section></main>
+<main><h1>Issue Agent</h1><p>为维护者整理信息、起草追问，审阅批准后发布。</p><span id="mode" class="badge"></span>
+<section><div class="row"><input id="token" type="password" placeholder="工作台访问口令" autocomplete="off" aria-label="工作台访问口令"><button id="refresh" class="secondary">刷新任务</button></div>
+<h2>发起调查</h2><div class="row"><input id="issue" type="number" min="1" value="2" aria-label="Issue 编号"><input id="goal" value="检查信息完整性并提出处理建议" style="flex:1" aria-label="调查目标"><button id="create">提交调查</button></div>
+<label><input id="write" type="checkbox" checked> 起草评论与标签，等待我批准</label><small>提交后任务进入队列，离开页面也会继续处理。再次点击同一提交不会重复创建；可点击“新建一次”重新调查。</small><button id="new" class="secondary">新建一次</button><div id="error" role="alert"></div></section>
+<div class="grid"><section><h2>最近任务</h2><div id="tasks">输入口令后刷新。</div><button id="more" class="secondary" hidden>加载更多</button></section>
+<section><h2>调查与审阅</h2><p id="status">从左侧选择任务，或发起一次调查。</p><p id="summary"></p><div id="findings"></div>
+<div id="review" hidden><h2>待批准的具体动作</h2><p id="target"></p><label><input id="useComment" type="checkbox"> 发布以下评论</label><textarea id="comment" aria-label="待发布评论"></textarea><label><input id="useLabels" type="checkbox"> 添加以下标签（以英文逗号分隔）</label><input id="labels" style="width:90%;margin:10px 0" aria-label="待添加标签"><p id="revision"></p><div class="row"><button id="save" class="secondary">保存为新版本</button><button id="approve">批准已保存的版本</button><button id="reject" class="secondary">拒绝此方案</button></div><small>修改后请先保存。批准只对页面所示的方案版本有效。</small></div>
+<button id="resume" hidden>核对并恢复</button><button id="reanalyze" hidden>基于最新信息重新调查</button><details><summary>方案历史、执行记录与核验结果</summary><pre id="history"></pre><pre id="events"></pre></details></section></div></main>
 <script>
-const $=id=>document.getElementById(id); let task=null;
-let lastSubmission=null;try{lastSubmission=JSON.parse(localStorage.getItem('issue-agent-submission')||'null')}catch{}
-async function api(path,body,extraHeaders={}){const response=await fetch(path,{method:body?'POST':'GET',headers:{'Content-Type':'application/json',...extraHeaders,...($('token').value?{'Authorization':'Bearer '+$('token').value}:{})},...(body?{body:JSON.stringify(body)}:{})});const data=await response.json();if(!response.ok)throw Error(data.error||JSON.stringify(data));return data}
-async function show(data){task=data;$('taskid').value=data.id;localStorage.setItem('issue-agent-last-task',data.id);$('status').textContent='任务 '+data.id+' · '+data.status+(data.error?' · '+data.error:'');$('result').textContent=JSON.stringify(data.result||{},null,2);$('approval').hidden=data.status!=='awaiting_approval';$('actions').textContent=JSON.stringify({repository:(await api('/health')).repository,issue_number:data.request.issue_number,actions:data.result?.actions},null,2);$('resume').hidden=!['interrupted','reconciliation_needed'].includes(data.status);$('events').textContent=JSON.stringify(await api('/tasks/'+data.id+'/events'),null,2)}
-async function run(fn){$('error').textContent='';for(const b of document.querySelectorAll('button'))b.disabled=true;try{await fn()}catch(e){$('error').textContent=e.message}finally{for(const b of document.querySelectorAll('button'))b.disabled=false}}
-$('create').onclick=()=>run(async()=>{const body={issue_number:Number($('issue').value),goal:$('goal').value,propose_actions:$('write').checked};const signature=JSON.stringify(body);if(!lastSubmission||lastSubmission.signature!==signature)lastSubmission={signature,key:crypto.randomUUID()};localStorage.setItem('issue-agent-submission',JSON.stringify(lastSubmission));await show(await api('/tasks',body,{'Idempotency-Key':lastSubmission.key}));});
-$('newtask').onclick=()=>{lastSubmission=null;localStorage.removeItem('issue-agent-submission');$('taskid').value='';$('status').textContent='已开始新任务，请提交调查目标。';$('approval').hidden=true;$('resume').hidden=true;};
-$('load').onclick=()=>run(async()=>show(await api('/tasks/'+encodeURIComponent($('taskid').value))));
-for(const decision of ['approve','reject'])$(decision).onclick=()=>run(async()=>show(await api('/tasks/'+task.id+'/approval',{digest:task.digest,decision})));
+const $=id=>document.getElementById(id);
+const names={queued:'排队中',running:'调查中',awaiting_approval:'等待审阅',approval_queued:'已收到审批，等待执行',executing:'执行中',completed:'已完成',cancelled:'已拒绝',failed:'处理失败',needs_review:'信息已变化，需要重新调查',reconciliation_needed:'写入结果待核对',interrupted:'任务中断'};
+const fields={reproduction:'复现步骤',environment:'运行环境',actual:'实际结果',expected:'期望结果'};
+const fieldStatus={present:'已提供',missing:'缺失',insufficient:'已有信息，但不够充分',conflicting:'存在冲突'};
+let task=null,busy=false,submission=null,cursor=null,dirty=false;
+const terminal=new Set(['awaiting_approval','completed','cancelled','failed','needs_review','reconciliation_needed','interrupted']);
+async function api(path,body,extra={}){const r=await fetch(path,{method:body===undefined?'GET':'POST',headers:{'Content-Type':'application/json',...extra,...($('token').value?{'Authorization':'Bearer '+$('token').value}:{})},...(body===undefined?{}:{body:JSON.stringify(body)})});const d=await r.json();if(!r.ok)throw Error(d.error||JSON.stringify(d));return d}
+async function run(fn){if(busy)return;busy=true;$('error').textContent='';document.querySelectorAll('button').forEach(b=>b.disabled=true);try{await fn()}catch(e){$('error').textContent=e.message}finally{busy=false;document.querySelectorAll('button').forEach(b=>b.disabled=false);$('approve').disabled=dirty}}
+async function list(more=false){const d=await api('/tasks?limit=20'+(more&&cursor?'&before='+cursor:''));if(!more)$('tasks').replaceChildren();cursor=d.next_cursor;$('more').hidden=!cursor;for(const t of d.items){const b=document.createElement('button');b.className='task';b.textContent='#'+t.request.issue_number+' · '+(names[t.status]||t.status)+'\n'+new Date(t.created*1000).toLocaleString();b.onclick=()=>run(async()=>show(await api('/tasks/'+t.id)));$('tasks').append(b)}}
+async function show(t){task=t;dirty=false;localStorage.setItem('issue-agent-last-task',t.id);$('status').textContent='#'+t.request.issue_number+' · '+(names[t.status]||t.status)+(t.error?'（'+t.error+'）':'');$('summary').textContent=t.result?.summary||'等待调查结果';$('findings').replaceChildren();for(const f of t.result?.field_findings||[]){const div=document.createElement('div');div.className='finding';const label=document.createElement('strong');label.textContent=(fields[f.field]||f.field)+'：'+fieldStatus[f.status];div.append(label);for(const e of f.evidence){const q=document.createElement('blockquote');q.textContent=e.quote;const source=document.createElement('small');source.textContent=e.source;div.append(q,source)}$('findings').append(div)}const a=t.result?.actions||[];const comment=a.find(x=>x.kind==='comment'),labels=a.find(x=>x.kind==='add_labels');$('useComment').checked=!!comment;$('comment').value=comment?.body||'';$('useLabels').checked=!!labels;$('labels').value=(labels?.labels||[]).join(', ');$('review').hidden=t.status!=='awaiting_approval';$('target').textContent='目标：'+t.request.repository+' / Issue #'+t.request.issue_number;$('revision').textContent='方案 v'+t.plan_version+' · '+(t.digest||'').slice(0,12);$('approve').disabled=false;$('resume').hidden=!['interrupted','reconciliation_needed'].includes(t.status);$('reanalyze').hidden=!(['needs_review','failed'].includes(t.status)||(t.status==='awaiting_approval'&&!t.plan_version));$('events').textContent=JSON.stringify(await api('/tasks/'+t.id+'/events'),null,2);$('history').textContent=JSON.stringify(await api('/tasks/'+t.id+'/plans'),null,2)}
+function edit(){dirty=true;$('approve').disabled=true;$('revision').textContent='有未保存修改，请先保存为新版本'}
+for(const id of ['comment','labels','useComment','useLabels'])$(id).oninput=edit;
+$('refresh').onclick=()=>run(()=>list());$('more').onclick=()=>run(()=>list(true));
+$('new').onclick=()=>{submission=null;$('error').textContent='下一次提交将创建新的调查。'};
+$('create').onclick=()=>run(async()=>{const body={issue_number:Number($('issue').value),goal:$('goal').value,propose_actions:$('write').checked};const signature=JSON.stringify(body);if(!submission||submission.signature!==signature)submission={signature,key:crypto.randomUUID()};await show(await api('/tasks',body,{'Idempotency-Key':submission.key}));await list()});
+$('save').onclick=()=>run(async()=>{const actions=[];if($('useComment').checked)actions.push({kind:'comment',body:$('comment').value,labels:[]});if($('useLabels').checked)actions.push({kind:'add_labels',body:'',labels:$('labels').value.split(',').map(x=>x.trim()).filter(Boolean)});await show(await api('/tasks/'+task.id+'/plan',{digest:task.digest,actions}));await list()});
+for(const decision of ['approve','reject'])$(decision).onclick=()=>run(async()=>{await show(await api('/tasks/'+task.id+'/approval',{digest:task.digest,decision}));await list()});
 $('resume').onclick=()=>run(async()=>show(await api('/tasks/'+task.id+'/resume',{})));
-$('taskid').value=localStorage.getItem('issue-agent-last-task')||'';
-api('/health').then(h=>$('mode').textContent=`仓库 ${h.repository} · 模型 ${h.model_mode} · 工具 ${h.tool_mode}`);
+$('reanalyze').onclick=()=>run(async()=>{await show(await api('/tasks',{issue_number:task.request.issue_number,goal:task.request.goal,propose_actions:task.request.propose_actions}));await list()});
+setInterval(()=>{if(task&&!terminal.has(task.status)&&!busy)run(async()=>{await show(await api('/tasks/'+task.id));await list()})},1800);
+api('/health').then(h=>$('mode').textContent=h.repository+' · '+(h.tool_mode==='fixture'?'本地演示数据':'GitHub 数据')+' · '+(h.model_mode==='fixture'?'规则模拟模型':'DeepSeek')).catch(e=>$('error').textContent=e.message);
 </script></html>

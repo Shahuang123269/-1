@@ -16,7 +16,7 @@ class Action(BaseModel):
     model_config = ConfigDict(extra="forbid")
     kind: Literal["comment", "add_labels"]
     body: str = Field(default="", max_length=4000)
-    labels: list[Literal["bug", "enhancement", "needs-info", "triage"]] = Field(
+    labels: list[str] = Field(
         default_factory=list, max_length=4
     )
 
@@ -25,6 +25,13 @@ class Evidence(BaseModel):
     model_config = ConfigDict(extra="forbid")
     source: str
     quote: str = Field(min_length=1, max_length=500)
+
+
+class FieldFinding(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    field: Literal["reproduction", "environment", "actual", "expected"]
+    status: Literal["present", "missing", "insufficient", "conflicting"]
+    evidence: list[Evidence] = Field(default_factory=list, max_length=4)
 
 
 class Assessment(BaseModel):
@@ -37,6 +44,7 @@ class Assessment(BaseModel):
     priority: Literal["high", "normal", "unknown"]
     evidence: list[Evidence] = Field(min_length=1, max_length=10)
     actions: list[Action] = Field(default_factory=list, max_length=2)
+    field_findings: list[FieldFinding] = Field(default_factory=list, max_length=4)
 
 
 class ApprovalRequest(BaseModel):
@@ -58,3 +66,9 @@ class DomainError(Exception):
     def __init__(self, code: str, message: str = ""):
         self.code = code
         super().__init__(message or code)
+
+
+class PlanEditRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    digest: str = Field(pattern=r"^[a-f0-9]{64}$")
+    actions: list[Action] = Field(min_length=1, max_length=2)

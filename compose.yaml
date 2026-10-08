@@ -1,11 +1,38 @@
-services:
-  agent:
+﻿services:
+  api:
     build: .
     ports: ["127.0.0.1:8000:8000"]
     env_file: .env
     environment:
       IA_API_TOKEN: ${IA_API_TOKEN:?Set IA_API_TOKEN in .env before running Compose}
-    volumes: ["agent-data:/app/data"]
+      IA_EMBEDDED_WORKER: "false"
+      IA_DATA_DIR: /app/data
+      IA_POLICY_PATH: /app/policy.toml
+      IA_GITHUB_TOKEN: ""
+      IA_GITHUB_READ_TOKEN: ""
+      IA_DEEPSEEK_API_KEY: ""
+    volumes:
+      - agent-data:/app/data
+      - ./policy.example.toml:/app/policy.toml:ro
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=3)"]
+      interval: 20s
+      timeout: 5s
+      retries: 3
+  worker:
+    build: .
+    command: ["python", "-m", "issue_agent.worker"]
+    env_file: .env
+    environment:
+      IA_DATA_DIR: /app/data
+      IA_POLICY_PATH: /app/policy.toml
+      IA_API_TOKEN: ""
+      IA_WEBHOOK_SECRET: ""
+    volumes:
+      - agent-data:/app/data
+      - ./policy.example.toml:/app/policy.toml:ro
+    restart: unless-stopped
+    stop_grace_period: 180s
 volumes:
   agent-data:

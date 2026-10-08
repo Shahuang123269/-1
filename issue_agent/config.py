@@ -17,10 +17,17 @@ class Settings(BaseSettings):
     github_token: SecretStr = SecretStr("")
     api_token: SecretStr = SecretStr("")
     allow_remote_writes: bool = False
+    github_read_token: SecretStr = SecretStr("")
+    webhook_secret: SecretStr = SecretStr("")
+    policy_path: Path | None = None
+    embedded_worker: bool = True
+    queue_limit: int = Field(64, ge=1, le=1000)
+    worker_poll_seconds: float = Field(0.2, ge=0.02, le=10)
     max_model_calls: int = Field(6, ge=2, le=20)
     max_tool_calls: int = Field(10, ge=1, le=40)
     max_context_chars: int = Field(40000, ge=2000, le=200000)
     timeout_seconds: float = Field(30, gt=0, le=120)
+    http_trust_env: bool = True
 
     @field_validator("repository")
     @classmethod

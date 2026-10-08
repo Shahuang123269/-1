@@ -1,0 +1,12 @@
+name = "example-triage"
+version = "1"
+required_fields = ["reproduction", "environment", "actual", "expected"]
+allowed_labels = ["bug", "enhancement", "needs-info", "triage"]
+comment_prefix = "为进一步排查，请补充："
+propose_on_webhook = true
+
+[label_mapping]
+bug = "bug"
+enhancement = "enhancement"
+needs-info = "needs-info"
+uncertain = "triage"

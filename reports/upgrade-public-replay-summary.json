@@ -1,0 +1,90 @@
+{
+  "generated_at": "2026-10-08T00:51:27.362313+00:00",
+  "model_mode": "deepseek",
+  "model": "deepseek-flash",
+  "prompt_sha256": "832509fb8a688b58b78a9176861fb334bf58712cd5bba68dd04237c085a8c5fc",
+  "remote_writes": false,
+  "input_mode": "frozen_public_snapshot_replay",
+  "rows": [
+    {
+      "case": "A01",
+      "source": "https://github.com/fastapi/fastapi/issues/811",
+      "snapshot_hash": "037ea12a7d49d958dfc1158ec1315d25be38fc0e4870b1ef6e3c83185db8d471",
+      "cutoff": "2026-10-02T14:36:52.775130+00:00",
+      "excluded_comments": 0,
+      "method": "rules",
+      "model_calls": 0,
+      "total_tokens": 0,
+      "elapsed_ms": 1,
+      "error": null,
+      "human_gold_scores": null
+    },
+    {
+      "case": "A01",
+      "source": "https://github.com/fastapi/fastapi/issues/811",
+      "snapshot_hash": "037ea12a7d49d958dfc1158ec1315d25be38fc0e4870b1ef6e3c83185db8d471",
+      "cutoff": "2026-10-02T14:36:52.775130+00:00",
+      "excluded_comments": 0,
+      "method": "single",
+      "model_calls": 1,
+      "total_tokens": 4369,
+      "elapsed_ms": 5709,
+      "error": null,
+      "human_gold_scores": null
+    },
+    {
+      "case": "A01",
+      "source": "https://github.com/fastapi/fastapi/issues/811",
+      "snapshot_hash": "037ea12a7d49d958dfc1158ec1315d25be38fc0e4870b1ef6e3c83185db8d471",
+      "cutoff": "2026-10-02T14:36:52.775130+00:00",
+      "excluded_comments": 0,
+      "method": "agent",
+      "error": null,
+      "model_calls": 2,
+      "total_tokens": 6723,
+      "elapsed_ms": 6410,
+      "human_gold_scores": null
+    },
+    {
+      "case": "A02",
+      "source": "https://github.com/fastapi/fastapi/issues/240",
+      "snapshot_hash": "7bece56b84a4e260308429e70e4f8add8794e63684e8571183685394f17d3cac",
+      "cutoff": "2026-10-02T14:39:22.966521+00:00",
+      "excluded_comments": 0,
+      "method": "rules",
+      "model_calls": 0,
+      "total_tokens": 0,
+      "elapsed_ms": 0,
+      "error": null,
+      "human_gold_scores": null
+    },
+    {
+      "case": "A02",
+      "source": "https://github.com/fastapi/fastapi/issues/240",
+      "snapshot_hash": "7bece56b84a4e260308429e70e4f8add8794e63684e8571183685394f17d3cac",
+      "cutoff": "2026-10-02T14:39:22.966521+00:00",
+      "excluded_comments": 0,
+      "method": "single",
+      "model_calls": 1,
+      "total_tokens": 5791,
+      "elapsed_ms": 4947,
+      "error": null,
+      "human_gold_scores": null
+    },
+    {
+      "case": "A02",
+      "source": "https://github.com/fastapi/fastapi/issues/240",
+      "snapshot_hash": "7bece56b84a4e260308429e70e4f8add8794e63684e8571183685394f17d3cac",
+      "cutoff": "2026-10-02T14:39:22.966521+00:00",
+      "excluded_comments": 0,
+      "method": "agent",
+      "error": null,
+      "model_calls": 2,
+      "total_tokens": 8057,
+      "elapsed_ms": 6091,
+      "human_gold_scores": null
+    }
+  ],
+  "reviewed_case_count": 0,
+  "note": "Unreviewed data contributes no accuracy. Current snapshot is not historical initial triage. Same inputs; agent has a larger call budget. Failed-call token usage may be unknown."
+}

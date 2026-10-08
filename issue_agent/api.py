@@ -4,12 +4,15 @@ import json
 from contextlib import asynccontextmanager
 from pathlib import Path
 
-from fastapi import FastAPI, Header, Request
+from fastapi import FastAPI, Header, Query, Request
 from fastapi.responses import HTMLResponse, JSONResponse, StreamingResponse
 
 from .config import Settings
-from .domain import ApprovalRequest, DomainError, TaskRequest
-from .engine import Engine
+from .domain import ApprovalRequest, DomainError, PlanEditRequest, TaskRequest
+from .policy import load_policy
+from .webhooks import receive_webhook
+from .worker import running_worker
+from .workflow_store import WorkflowStore
 
 
 def create_app(settings: Settings | None = None) -> FastAPI:
@@ -17,16 +20,19 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
     @asynccontextmanager
     async def lifespan(app):
-        async with Engine(settings) as engine:
-            app.state.engine = engine
+        app.state.store = WorkflowStore(settings.data_dir / "tasks.sqlite")
+        if settings.embedded_worker:
+            async with running_worker(settings):
+                yield
+        else:
             yield
 
-    app = FastAPI(title="Issue Agent", version="0.1.0", lifespan=lifespan)
+    app = FastAPI(title="Issue Agent", version="0.2.0", lifespan=lifespan)
 
     @app.middleware("http")
     async def access_boundary(request: Request, call_next):
         token = settings.api_token.get_secret_value()
-        if request.url.path not in {"/", "/health"}:
+        if request.url.path not in {"/", "/health", "/webhooks/github"}:
             if token:
                 received = request.headers.get("authorization", "")
                 if not hmac.compare_digest(received, "Bearer " + token):
@@ -41,7 +47,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     @app.exception_handler(DomainError)
     async def domain_error(request, exc):
         return JSONResponse(
-            {"error": exc.code}, status_code=404 if exc.code == "not_found" else 409
+            {"error": exc.code}, status_code=404 if exc.code == "not_found" else 503 if exc.code == "queue_full" else 409
         )
 
     @app.get("/", response_class=HTMLResponse)
@@ -55,33 +61,62 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             "model_mode": settings.model_mode,
             "tool_mode": settings.tool_mode,
             "repository": settings.repository,
-            "version": "0.1.0",
+            "version": "0.2.0",
         }
 
-    @app.post("/tasks", status_code=201)
-    async def create(request: TaskRequest, idempotency_key: str | None = Header(None)):
-        # V1 single executor: waits until investigation completes or approval pauses.
-        return await app.state.engine.create(request, idempotency_key)
+    @app.post("/webhooks/github", status_code=202)
+    async def webhook(request: Request):
+        return await receive_webhook(request, settings, app.state.store)
+
+    @app.get("/tasks")
+    def list_tasks(limit: int = Query(50, ge=1, le=100), before: str | None = None,
+                   status: str | None = None):
+        items = app.state.store.list_tasks(limit, before, status)
+        return {"items": items, "next_cursor": items[-1]["id"] if len(items) == limit else None}
+
+    @app.get("/queue")
+    def queue_status():
+        return app.state.store.queue_stats()
+
+    @app.post("/tasks", status_code=202)
+    def create(request: TaskRequest, idempotency_key: str | None = Header(None)):
+        payload = {**request.model_dump(), "repository": settings.repository,
+                   "tool_mode": settings.tool_mode,
+                   "policy": load_policy(settings.policy_path).model_dump()}
+        task_id = app.state.store.submit(payload, idempotency_key, limit=settings.queue_limit)
+        return app.state.store.task(task_id)
 
     @app.get("/tasks/{task_id}")
     def get_task(task_id: str):
-        return app.state.engine.store.task(task_id)
+        return app.state.store.task(task_id)
 
-    @app.post("/tasks/{task_id}/approval")
+    @app.post("/tasks/{task_id}/approval", status_code=202)
     async def approve(task_id: str, request: ApprovalRequest):
-        return await app.state.engine.approve(task_id, request.digest, request.decision)
+        app.state.store.enqueue_approval(task_id, request.digest, request.decision,
+                                         settings.queue_limit)
+        return app.state.store.task(task_id)
 
-    @app.post("/tasks/{task_id}/resume")
+    @app.post("/tasks/{task_id}/resume", status_code=202)
     async def resume(task_id: str):
-        return await app.state.engine.resume(task_id)
+        app.state.store.enqueue_resume(task_id, settings.queue_limit)
+        return app.state.store.task(task_id)
+
+    @app.get("/tasks/{task_id}/plans")
+    def plans(task_id: str):
+        return app.state.store.plan_history(task_id)
+
+    @app.post("/tasks/{task_id}/plan")
+    def edit_plan(task_id: str, request: PlanEditRequest):
+        return app.state.store.edit_plan(task_id, request.digest,
+                                         [a.model_dump() for a in request.actions])
 
     @app.get("/tasks/{task_id}/events")
     def events(task_id: str, after: int = 0):
-        return app.state.engine.store.events(task_id, after)
+        return app.state.store.events(task_id, after)
 
     @app.get("/tasks/{task_id}/stream")
     async def stream(task_id: str, request: Request, last_event_id: str = Header("0")):
-        app.state.engine.store.task(task_id)
+        app.state.store.task(task_id)
         try:
             after = max(0, int(last_event_id))
         except ValueError:
@@ -90,15 +125,17 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         async def generate():
             nonlocal after
             while not await request.is_disconnected():
-                for event in app.state.engine.store.events(task_id, after):
+                for event in app.state.store.events(task_id, after):
                     after = event["seq"]
                     yield f"id: {after}\nevent: task_event\ndata: {json.dumps(event, ensure_ascii=False)}\n\n"
-                if app.state.engine.store.task(task_id)["status"] in {
+                if app.state.store.task(task_id)["status"] in {
                     "completed",
                     "failed",
                     "cancelled",
                     "awaiting_approval",
                     "reconciliation_needed",
+                    "needs_review",
+                    "interrupted",
                 }:
                     return
                 yield ": heartbeat\n\n"
